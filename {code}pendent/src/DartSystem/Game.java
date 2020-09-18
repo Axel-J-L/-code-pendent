@@ -14,7 +14,7 @@ public class Game {
     private final double rentCost;
     private final String status;
 
-    private static final Game[] games = { new Game("It is what it is", "Comedy", 12, "Not Available"),
+    private static Game[] games = { new Game("It is what it is", "Comedy", 12, "Not Available"),
             new Game("Brainfreeze", "Comedy", 12, "Available"),
             new Game("Give and take", "Comedy", 12, "Not Available"),
             new Game("Pineapples", "Comedy", 12, "Available") };
@@ -40,6 +40,7 @@ public class Game {
         this.status = gameStatus;
     }
 
+    // TODO Just adding a note to remove this main later once we clean up the project code (D)
     public static void main(String[] args) {
         // create array of games
         // ArrayList<Game> listOfGames = new ArrayList<>();
@@ -52,6 +53,7 @@ public class Game {
      *
      */
     public static void addNewGame() {
+        // TODO make not static
         Scanner newGameInput = new Scanner(System.in); //Opened scanner here as 3 inputs are required so I think it isn't best to open scanner for each one in helper..
 
         System.out.print("Title of Game? :  ");
@@ -70,13 +72,15 @@ public class Game {
         }
 
         gamesNew[games.length] = new Game(newGameTitle, newGameGenre, newGameRentCost);
-        System.out.println("Game Added Successfully : " + "\n" + gamesNew[gamesNew.length - 1].id + " : " + gamesNew[gamesNew.length - 1].title + " (" + gamesNew[gamesNew.length - 1].genre + "). " + gamesNew[gamesNew.length - 1].rentCost
-                + "kr. " + "Status: " + gamesNew[gamesNew.length - 1].status + "\n");
+        games = gamesNew;
 
-        viewGames(gamesNew);
+        System.out.println("Game Added Successfully : " + "\n" + games[games.length - 1].id + " : " + games[games.length - 1].title + " (" + games[games.length - 1].genre + "). " + games[games.length - 1].rentCost
+                + "kr. " + "Status: " + games[games.length - 1].status + "\n");
+
+        viewGames(games);
         System.out.println("Press enter to go back to Employee menu");
         newGameInput.nextLine();
-        newGameInput.close();
+      //  newGameInput.close();
         Employee.employeeMenu();
     }
 
@@ -84,7 +88,7 @@ public class Game {
      *
      */
     public static void removeGame() {
-
+        // TODO make not static
         // TODO implement here
         System.out.println("Remove a game");
     }
@@ -101,6 +105,7 @@ public class Game {
 
 
     public static void viewGames(Game[] games) {
+        // TODO make not static
         // TODO implement here
         System.out.println("Updated game list:");
         for (Game game : games) {
@@ -109,6 +114,7 @@ public class Game {
         }
     }
     public static void viewAll() {
+        // TODO make not static
         // TODO implement here
         System.out.println("Games:");
         for (Game game : games) {

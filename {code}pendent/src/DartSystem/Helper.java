@@ -1,10 +1,13 @@
 package DartSystem;
+//d
 
+import java.time.Year;
 import java.util.*;
 import java.io.*;
 
 public class Helper {
-
+    public static final int CURRENT_YEAR = Year.now().getValue();
+    public static Scanner input = new Scanner(System.in); // static scanner
     String userInput;
 
     //Default Constructor
@@ -15,9 +18,8 @@ public class Helper {
     // THIS ONE IS SUPER USEFUL USE IT! something with opening and closing the scanner break swapping between menus (Drake)
     public String getInput(String message) { // Method to get string input from user and return
 
-        Scanner scanner = new Scanner(System.in);  // Create a Scanner object
         System.out.print(message); //removed println and replaced with print (D) if we need and println version we'll make one
-        String userInput = scanner.nextLine();  // Read user input
+        String userInput = input.nextLine();  // Read user input
         // scanner.close(); // Close scanner - This causes issue, leave it commented out (Altan)
         return userInput;  // Output user input
 
@@ -26,10 +28,9 @@ public class Helper {
     // made this to get integers instead of String (Drake)
     public int getInt(String message) { // Method to get string input from user and return
 
-        Scanner scanner = new Scanner(System.in);  // Create a Scanner object
         System.out.print(message); //removed println and replaced with print (D) if we need and println version we'll make one
-        int userInput = scanner.nextInt();  // Read user input
-        scanner.nextLine();
+        int userInput = input.nextInt();  // Read user input
+        input.nextLine();
         // scanner.close(); // Close scanner - This causes issue, leave it commented out (Altan)
         return userInput;  // Output user input
 
@@ -41,9 +42,8 @@ public class Helper {
 
         // di while to loop around until user enter one of the AcceptSet characters. Anything else, just keeps looping
         do {
-            Scanner menu = new Scanner(System.in);
             System.out.print("\n" + message); // String message from called class before asking for input
-            userInput = menu.nextLine(); // Gets user input
+            userInput = input.nextLine(); // Gets user input
 
 
             for (int i = 0; i < acceptSet.length; i++) { // Loop around AcceptSet array for matching letter

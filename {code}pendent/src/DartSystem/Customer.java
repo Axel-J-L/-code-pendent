@@ -12,6 +12,7 @@ public class Customer {
     }
 
     public static void customerMenu() {
+        // TODO make not static
         System.out.println("\nCustomer Screen - Type one of the options below:");
         System.out.println("1. Rent a game");
         System.out.println("2. Return a game");
@@ -37,15 +38,15 @@ public class Customer {
         }
     }
 
-    public void addCustomer() {
-        // TODO implement here
+    public static void addCustomer() {
+        // TODO make not static
         System.out.println("Add a customer here");
     }
 
 
 
-    public void removeCustomer() {
-        // TODO implement here
+    public static void removeCustomer() {
+        // TODO make not static
         System.out.println("Remove a customer here");
     }
 

@@ -8,6 +8,7 @@ public class Manager {
 
  // I think this menu might be better to have in the DartController class (D)
     public static void managerMenu() {
+        // TODO make not static
         System.out.println("\nManager Screen - Type one of the options below:");
         System.out.println("1. Add an employee");
         System.out.println("2. View all employees");
@@ -37,7 +38,7 @@ public class Manager {
     //  changed this password authenticator to work for both employee and manager and customer if needed later. (d)
     //had to remove reference to menus at this time since the menus are currently static (d)
     public String authManager(){
-        // TODO implement here
+        // TODO get functionality to 100%
             String password = "admin1234";
             Helper Authorize = new Helper();
             String authCheck = Authorize.Authenticator(password);
