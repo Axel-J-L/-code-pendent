@@ -1,58 +1,45 @@
 package DartSystem;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 import java.util.UUID;
-/**
- *
- */
+
 public class Game {
 
-    private final UUID id;
-    private final String title;
-    private final String genre;
-    private final double rentCost;
-    private final String status;
+    private UUID id;
+    private String title;
+    private String genre;
+    private double rentCost;
+    private boolean isRented;
 
-    private static Game[] games = { new Game("It is what it is", "Comedy", 12, "Not Available"),
-            new Game("Brainfreeze", "Comedy", 12, "Available"),
-            new Game("Give and take", "Comedy", 12, "Not Available"),
-            new Game("Pineapples", "Comedy", 12, "Available") };
+    private static Game[] games = { new Game("It is this", "Comedy", 12, true),
+            new Game("Brainfreeze", "Comedy", 12, true),
+            new Game("Give and take", "Comedy", 12, true),
+            new Game("Pineapples", "Comedy", 12, false) };
 
     /**
      * Default constructor
      */
+    Game(){
+    }
 
     Game(String gameTitle, String gameGenre, double gameRentCost) {
         this.id = UUID.randomUUID();
         this.genre = gameGenre;
         this.title = gameTitle;
         this.rentCost = gameRentCost;
-        this.status = "Available";
+        this.isRented = false;
     }
 
 
-    Game(String gameTitle, String gameGenre, double gameRentCost, String gameStatus) {
+    Game(String gameTitle, String gameGenre, double gameRentCost, boolean gameIsRented) {
         this.id = UUID.randomUUID();
         this.title = gameTitle;
         this.genre = gameGenre;
         this.rentCost = gameRentCost;
-        this.status = gameStatus;
+        this.isRented = gameIsRented;
     }
 
-    // TODO Just adding a note to remove this main later once we clean up the project code (D)
-    public static void main(String[] args) {
-        // create array of games
-        // ArrayList<Game> listOfGames = new ArrayList<>();
-        // listOfGames.add();
-    }
-
-  //  public static void addGame(int id, String title, String genre, double rentCost, String status) {} Considering using one method for asking input and another for applying to new array.
-
-    /**
-     *
-     */
-    public static void addNewGame() {
+    public void addNewGame() {
         // TODO make not static
         Scanner newGameInput = new Scanner(System.in); //Opened scanner here as 3 inputs are required so I think it isn't best to open scanner for each one in helper..
 
@@ -66,60 +53,64 @@ public class Game {
         double newGameRentCost = newGameInput.nextDouble();
         newGameInput.nextLine();
 
-        Game[] gamesNew = new Game[games.length + 1];
+        Game[] gamesNew = new Game[games.length + (games.length/2)];
+
         for (int i = 0; i < games.length; i++) {
             gamesNew[i] = games[i];
         }
-
         gamesNew[games.length] = new Game(newGameTitle, newGameGenre, newGameRentCost);
+
         games = gamesNew;
 
-        System.out.println("Game Added Successfully : " + "\n" + games[games.length - 1].id + " : " + games[games.length - 1].title + " (" + games[games.length - 1].genre + "). " + games[games.length - 1].rentCost
-                + "kr. " + "Status: " + games[games.length - 1].status + "\n");
-
-        viewGames(games);
-        System.out.println("Press enter to go back to Employee menu");
-        newGameInput.nextLine();
-      //  newGameInput.close();
-        Employee.employeeMenu();
-    }
-
-    /**
-     *
-     */
-    public static void removeGame() {
-        // TODO make not static
-        // TODO implement here
-        System.out.println("Remove a game");
-    }
-
-    public String toString() {
-        return (id + " : " + title + " (" + genre + "). " + rentCost + "kr. " + "Status: " + status + "\n");
-    }
-
-    /**
-     *
-     */
-    public static void seeAll() {
-    }
-
-
-    public static void viewGames(Game[] games) {
-        // TODO make not static
-        // TODO implement here
-        System.out.println("Updated game list:");
-        for (Game game : games) {
-            System.out.println(game.id + " : " + game.title + " (" + game.genre + "). " + game.rentCost
-                    + "kr. " + "Status: " + game.status + "\n");
+        int countArray = 0;
+        for (int i = 0; games[i] != null; i++){
+            countArray = i;
         }
+        System.out.println("Game Added Successfully : " + "\n" + games[countArray].id + " : " + games[countArray].title + " (" + games[countArray].genre + "). " + games[countArray].rentCost
+                + "kr. " + "Status: " + games[countArray].isRented + "\n");
+
+        viewAll();
+        System.out.println("1) Employee Menu " + "\n" + "2) Add another game");
+        int userChoice = newGameInput.nextInt();
+        if (userChoice == 1){
+            EmployeeMenu.employeeMenu();
+        } else addNewGame();
+      newGameInput.close();
     }
-    public static void viewAll() {
-        // TODO make not static
-        // TODO implement here
+
+    public void removeGame() {
+        Scanner gameToRemove = new Scanner(System.in);
+        System.out.println("Title of game to remove?");
+        String gameTitle = gameToRemove.nextLine();
+        for (int i = 0; i < games.length; i++) {
+            if (games[i].title.equalsIgnoreCase(gameTitle)) {
+                for (int j = i + 1; j < games.length + 1; j++) {
+                    if (i == games.length - 1) {
+                        games[i] = null;
+                    } else {
+                        games[i] = games[j];
+                        i++;
+                    }
+                }
+            }
+        }
+        viewAll();
+    }
+
+    public void viewAll(){
         System.out.println("Games:");
-        for (Game game : games) {
-            System.out.println(game.id + " : " + game.title + " (" + game.genre + "). " + game.rentCost
-                    + "kr. " + "Status: " + game.status + "\n");
+        for (int i = 0; i < games.length; i++) {
+            if (games[i] != null){
+                System.out.println(games[i].id + " : " + games[i].title + " (" + games[i].genre + "). " + games[i].rentCost
+                        + "kr. " + "Status: " + games[i].isRented + "\n");
         }
+        }
+        System.out.println("1) Back to Employee Menu " + "\n" + "2) Back to Main Menu");
+        Scanner userChoice = new Scanner(System.in);
+        int whereTo = userChoice.nextInt();
+
+        if (whereTo == 1){
+            EmployeeMenu.employeeMenu();
+        } else DartController.DartController();
     }
 }

@@ -55,28 +55,7 @@ public class DartController {
 //    public void exceptionHandler() {
 //        // TODO implement here
     }
-
 }
 
 
 
-
-//    going to modify this so that if the wrong password is entered it takes you back to the main menu (drake)
-//        Scanner input = new Scanner(System.in);
-//        int menuC = 0;
-//        while (menuC != 1 || menuC != 2 || menuC != 3 || menuC != 4) {
-//            menuC = input.nextInt();
-//            input.nextLine();
-//            if (menuC == 1) {
-//                System.out.print("password: ");
-//                String password = input.nextLine();
-//            } else if (menuC == 2) {
-//                // generate employee menu
-//            } else if (menuC == 3) {
-//                // generate customer menu
-//            } else if (menuC == 4) {
-//                // exit system
-//            } else {
-//                System.out.println("");
-//            }
-//        }

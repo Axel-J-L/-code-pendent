@@ -91,38 +91,28 @@ public class Helper {
 
         return authCheck;
     }
-
-    // Drake, let's add this on Employee Class. Let the each class to do their own specific actions.
-    // WORK IN PROGRESS, CREATING A METHOD FOR ADDING AND REMOVING USERS //Axel n Drake
-    //    public ArrayList<String> addUserList(String addUser, String addEmployee) {
-//        Scanner input = new Scanner(System.in);
-//        ArrayList<String> user = new ArrayList<>();
-//        System.out.println("Add employee name: ");
-//        String name1= new String();
-//
-//
-//        System.out.print(addUser + "Y/N: ");
-//        String eUser = input.nextLine();
-//        eUser = eUser.toUpperCase();
-//
-//
-//        while (eUser.equals("Y")) {
-//
-//            System.out.print(addEmployee);
-//            String name = input.nextLine();
-//            user.add(name);
-//            System.out.print(addUser + "Y/N: ");
-//            eUser = input.nextLine();
-//            eUser = eUser.toUpperCase();
-//
-//
-//        }
-//        for (int i = 0; i < user.size(); i++) {
-//            System.out.println(user.get(i));
-//
-//        }
-
+    /*======================Array Increment/Reformat=======================*/
+    public Employee[] increaseEmployeeArr(Employee[] array) { //Employee[] arr is our throw away array to bridge data into Employee[] newEmployeeArr
+        Employee[] newEmployeeArr = new Employee[(int) (array.length * 1.5)]; // creates a new array that is larger then the array you feed into the method of 1.5
+        for (int i = 0; i < array.length; i++) { // loops for copying.
+            newEmployeeArr[i] = array[i]; // copy's the information from fed in array to newEmployee array
+        }
+        return newEmployeeArr; // returns our new and fancy larger array with same values as the one fed into the method
     }
 
+    public Employee[] trimArray(Employee[] array){
+        int position = 0;
+        for (int i = 0; i < array.length; i++){
+            if (array[i] != null){
+                position++;
+            }
+        }
+        Employee[] newEmployeeArr = new Employee[(int) (position)];
+        for (int i = 0; i < array.length; i++) { // loops for copying.
+            newEmployeeArr[i] = array[i]; // copys the information from fed in array to newEmployee array
+        }
+        return newEmployeeArr; // returns our new and fancy larger array with same values as the one fed into the method
+    }
+}
 
 

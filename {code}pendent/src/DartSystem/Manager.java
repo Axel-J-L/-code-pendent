@@ -6,7 +6,6 @@ public class Manager {
     public Manager() {
     }
 
- // I think this menu might be better to have in the DartController class (D)
     public static void managerMenu() {
         // TODO make not static
         System.out.println("\nManager Screen - Type one of the options below:");

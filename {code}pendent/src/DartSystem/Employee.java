@@ -1,5 +1,4 @@
 package DartSystem;
-// Hey this is a demonstration for commit (D)
 import java.time.Year;
 import java.util.*;
 
@@ -7,17 +6,30 @@ public class Employee {
 
    public Employee() {
     }
-    Employee[] employeeDB;
-    Employee[] employeeBridge;
-    UUID employeeId;
-    String name;
-    int birthYear;
-    String address;
-    int grossSalary;
+    private UUID employeeID;
+    private String name;
+    private int birthYear;
+    private String address;
+    private double grossSalary;
+    final public static int INITIAL_ARRAY_SIZE = 4;
+    Employee[] employees =  new Employee[INITIAL_ARRAY_SIZE];
 
 
+    public static final double MIN_SALARY=100000.00;
+    public static final double  BONUS_ONE=4000.00;
+    public static final double BONUS_TWO=6000.00;
+    public static final double BONUS_THREE=7500.00;
 
-    // I think the employeeMenu might be better in the DartController class (D)
+
+    public Employee(String name, int birthYear, String address, double salary) {
+        this.name = name;
+        this.grossSalary = salary;
+        this.birthYear = birthYear;
+        this.address = address;
+        this.employeeID = genEmployeeUUID();
+
+    }
+
     public void employeeMenu() {
         // TODO make not static
         // Finished for the moment
@@ -45,11 +57,13 @@ public class Employee {
             }
             case "c" -> {
                 System.out.println("Register a customer");
-                Customer.addCustomer();
+                Customer addNewCustomer= new Customer();
+                addNewCustomer.addCustomer();
             }
             case "d" -> {
                 System.out.println("Remove customer: ");
-                Customer.removeCustomer();
+                Customer removeOldCustomer= new Customer();
+                removeOldCustomer.removeCustomer();
             }
             case "e" -> System.out.println("Show total rent profit");
             case "f" -> {
@@ -63,37 +77,55 @@ public class Employee {
             default -> System.out.println("no match");
         }
     }
+    /*==========================Add Employee=========================*/
+        public Employee[] addEmployee(Employee employee, Employee[] employeeArr) {
+            for (int i = 0; i < employeeArr.length; i++) {
+                if (employeeArr[i] != null) {
+                    continue;
+                } else {
+                    employeeArr[i] = employee;
+                    i = employeeArr.length;
+                    //break; // I WILL FIGHT YOU
+                }
+            }
+            return employeeArr;
+        }
+    /*==========================Remove Employee=========================*/
+    public Employee[] removeEmployee(UUID employeeID, Employee[] employeeArr) {
+        for (int i = 0; i < employeeArr.length; i++) { // goes through the array fed into method
+            if (employeeArr[i] == null) continue;
+            if (!employeeArr[i].getEmployeeID().equals(employeeID)) { //  it doesnt equal our employee to remove do nothing.
+                continue;
+            } else {
+                employeeArr[i] = null; // if it does have the employee we want to remove. (Ternary statement?)
+                i = employeeArr.length;
+            }
+        }
+
+        for (int j = 0; j < employeeArr.length-1; j++) { //runs through the array
+            if (employeeArr[j] !=(null) && employeeArr[j + 1] != null) { // position j != null && position j+1 != null
+                continue; //do nothing
+            } else if (employeeArr[j] == (null) && employeeArr[j + 1] != null) { // position j = null && position j+1 !=null
+                employeeArr[j] = employeeArr[j + 1]; // position j = position j + 1\
+                employeeArr[j+1] = null;
+            } else {
+                j = employeeArr.length; // only other situation would be position j && j+1 == null which means the array has two nulls in a row
+            }
+        }
+
+        return employeeArr;
+    }
 
 
-    public void addEmployee() {
-        /*
-        TODO eventually move the salary portion (great work, looks super good!) to the salary method (D)
-         add the portion that inserts the created employee into an array (D)
-         */
-
-        // changed the variables to be the class ones :D (D)
-        Helper input = new Helper(); // Create new Helper object
-        // java method to extract current year and java method to convert that value to a int - (d)
-        // generate a ID and ask for employee name & stores the name
-        this.employeeId = UUID.randomUUID();
-        String askName = "Employee name: ";
-        this.name = input.getInput(askName);
-
-        // asks for birth year then subtracts that from currentYear (we ideally want to make this represent the current year)
-        // then calculates age
-        String askBirthYear = "Employee birth year: ";
-        this.birthYear=input.getInt(askBirthYear);
-        Helper year = new Helper();
-        int age=year.CURRENT_YEAR-birthYear;
 
         // asks for gross salary and using the method below will generate net salary;
-        String askSalary=("Ask the Gross salary: ");
-        int employeeGrossSalary=input.getInt(askSalary);
-        this.grossSalary = employeeGrossSalary; // I think this is correct but i could be wrong (D)
-        double netSalary=0;
+        //String askSalary=("Ask the Gross salary: ");
+        //int employeeGrossSalary=input.getInt(askSalary);
+        //this.grossSalary = employeeGrossSalary; // I think this is correct but i could be wrong (D)
+        //double netSalary=0;
         // TODO move this to a salary method its down at the bottom
         //  (Navya I believe you made this let me know if you think this is a good idea -(D)
-            if(grossSalary<100000) {
+         /* if(grossSalary<100000) {
             netSalary=grossSalary;
            // System.out.print("Employee's net salary is " + grossSalary+" SEK");
         } else  {
@@ -117,9 +149,8 @@ public class Employee {
                     bonus = 7500;
                     netSalary = netSalary + bonus;
                     System.out.print("Employee's net salary with bonus :"+netSalary);
-                }
+                }*/
 
-           }
         //int Salary;
 
 
@@ -140,29 +171,77 @@ public class Employee {
             return "main menu";
         }
     }
-
-
-    public void removeEmployee() {
-        // TODO implement a method to remove employee's from the employee array
-        // add a function to print name followed by ID so that you can see the ID associated with employee when removing-(D)
-        Helper input=new Helper();
-        String removeName = "Type ID to remove associated employee: ";
-        this.name = input.getInput(removeName);
-
-
+    public String getName(){
+        return name;
     }
+    public double getSalary(){
+        return grossSalary;
+    }
+    public int getBirthYear(){
+        return birthYear;
+    }
+    public String getAddress(){
+        return address;
+    }
+    public UUID getEmployeeID() { return employeeID;}
+
+    private UUID genEmployeeUUID() {
+        return UUID.randomUUID();
+    }
+
+    public String toString(){
+        return " => Name: " + this.name + " => UUID: " + this.employeeID + "\n*---*\n";
+    }
+
+
     /**
      * 
      */
-    public static void viewEmployees() {
-        // TODO make not static
-        // TODO Create a loop that runs through the employees within our array of employee obects until it hits an 'empty' slot
+    public void viewEmployees() {
         System.out.println("These are all the employees: ");
+        for (Employee employee : employees) {
+            if (employee == null) return;
+            System.out.println(employee.toString());
+        }
     }
+
 
 
     public void salary() {
-        // TODO implement here
-    }
+        Helper input = new Helper();
+        String askBirthYear = "Employee birth year: ";
+        this.birthYear = input.getInt(askBirthYear);
+        Helper year = new Helper();
+        int age = year.CURRENT_YEAR - birthYear;
+        double netSalary = 0;
 
+
+       //public static final double MIN_SALARY=100000.00;
+        if(grossSalary<MIN_SALARY) {
+            netSalary=grossSalary;
+
+        } else  {
+            if (grossSalary>=MIN_SALARY) {
+                netSalary = grossSalary - ((30.0 / 100) * grossSalary);
+            }
+        }
+        double bonus;
+        if(age<22) { // change to not be magic numbers instead constant - (n)
+            bonus = 4000;
+            netSalary = netSalary + bonus;
+            System.out.print("Employee's net salary with bonus :"+netSalary);
+        }else
+        if(age==22&&age<30){ // change to not be magic numbers instead constant - (n)
+            bonus=6000;
+            netSalary=netSalary+bonus;
+            System.out.print("Employee's net salary with bonus :"+netSalary);
+        }else
+        if(age>30) { // change to not be magic numbers instead constant - (n)
+            bonus = 7500;
+            netSalary = netSalary + bonus;
+            System.out.print("Employee's net salary with bonus :"+netSalary);
+        }
+
+    }
 }
+
