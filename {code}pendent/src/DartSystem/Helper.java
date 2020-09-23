@@ -91,6 +91,7 @@ public class Helper {
     }
 
     public Employee[] trimArray(Employee[] array){
+        if (array.length == 0) return array;
         int position = 0;
         for (int i = 0; i < array.length; i++){
             if (array[i] != null){
@@ -99,9 +100,10 @@ public class Helper {
         }
         Employee[] newEmployeeArr = new Employee[(int) (position)];
         for (int i = 0; i < array.length; i++) { // loops for copying.
+            if (array[i] == null) continue;
             newEmployeeArr[i] = array[i]; // copys the information from fed in array to newEmployee array
         }
-        return newEmployeeArr; // returns our new and fancy larger array with same values as the one fed into the method
+        return newEmployeeArr; // returns our new and fancy array with no nulls with same values as the one fed into the method
     }
 }
 

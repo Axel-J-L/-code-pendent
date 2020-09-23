@@ -1,6 +1,6 @@
 package DartSystem;
 import java.time.Year;
-import java.util.*;
+import java.util.UUID;
 
 public class Employee {
 
@@ -9,8 +9,7 @@ public class Employee {
     private int birthYear;
     private String address;
     private double grossSalary;
-    private final int INITIAL_ARRAY_SIZE = 4;
-    private Employee[] employees =  new Employee[INITIAL_ARRAY_SIZE];
+    private static Employee[] employees =  new Employee[4];
 
 
     private final double MIN_SALARY=100000.00;
@@ -49,6 +48,10 @@ public class Employee {
 //        }
 
     public void addEmployee() {
+
+        if (employees[employees.length - 1] != null) {
+            helper.increaseEmployeeArr(employees);
+        }
 
         System.out.print("Enter new employee's name: ");
         String name = helper.input.nextLine();
@@ -105,14 +108,26 @@ public class Employee {
 //                }
 
 
-    public Employee[] removeEmployee(UUID employeeID) {
+    public Employee[] removeEmployee() {
+        viewEmployees();
+        boolean exists = false;
+        System.out.print("Employee UUID to remove: ");
+        UUID enteredUUID = UUID.fromString(helper.input.nextLine());
         for (int i = 0; i < employees.length; i++) { // goes through the array fed into method
+            String deletedName = "";
             if (employees[i] == null) continue;
-            if (!employees[i].getEmployeeID().equals(employeeID)) { //  it doesnt equal our employee to remove do nothing.
+            if (!employees[i].getEmployeeID().equals(enteredUUID)) { //  it doesnt equal our employee to remove do nothing.
                 continue;
             } else {
+                deletedName = employees[i].getName();
                 employees[i] = null; // if it does have the employee we want to remove. (Ternary statement?)
+                exists = true;
                 i = employees.length;
+            }
+            if (exists) {
+                System.out.println("\n¤ Employee " + deletedName + " removed.");
+            } else {
+                System.out.println("no employee with that UUID exists."); // doesnt reach this statement
             }
         }
 
@@ -126,7 +141,7 @@ public class Employee {
                 j = employees.length; // only other situation would be position j && j+1 == null which means the array has two nulls in a row
             }
         }
-
+        helper.trimArray(employees);
         return employees;
     }
 
@@ -139,48 +154,15 @@ public class Employee {
         if (authSuccess) {
             EmployeeMenu.employeeMenu();
         } else {
-            System.out.println("\n*** Wrong password *** \n");
-            DartController dart2 = new DartController();
-            dart2.DartController();
+            System.out.println("\n>>> Wrong password <<< \n");
+            DartController mainMenu = new DartController();
+            mainMenu.DartController();
         }
-    }
-
-    // getters
-    public String getName() {
-        return name;
-    }
-
-    public double getSalary() {
-        return grossSalary;
-    }
-
-    public int getBirthYear() {
-        return birthYear;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public UUID getEmployeeID() {
-        return employeeID;
-    }
-
-    public Employee[] getEmployees() {
-        return employees;
-    }
-
-    private UUID genEmployeeUUID() {
-        return UUID.randomUUID();
-    }
-
-    public String toString() {
-        return " => Name: " + this.name + " => UUID: " + this.employeeID + "\n*---*\n";
     }
 
 
     public void viewEmployees() {
-        System.out.println("These are all the employees: ");
+        System.out.println("\n>>> These are all the employees <<<");
         for (Employee employee : employees) {
             if (employee == null) return;
             System.out.println(employee.toString());
@@ -221,6 +203,45 @@ public class Employee {
             System.out.print("Employee's net salary with bonus :" + netSalary);
         }
 
+    }
+    // getters
+    public String getName() {
+
+        return name;
+    }
+
+    public double getSalary() {
+
+        return grossSalary;
+    }
+
+    public int getBirthYear() {
+
+        return birthYear;
+    }
+
+    public String getAddress() {
+
+        return address;
+    }
+
+    public UUID getEmployeeID() {
+
+        return employeeID;
+    }
+
+    public Employee[] getEmployees() {
+
+        return employees;
+    }
+
+    private UUID genEmployeeUUID() {
+
+        return UUID.randomUUID();
+    }
+
+    public String toString() {
+        return "\n¤ Name: " + this.name + ", UUID: " + this.employeeID + "\n";
     }
 }
 

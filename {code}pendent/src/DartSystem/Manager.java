@@ -21,26 +21,18 @@ public class Manager {
         switch(mInput.toLowerCase())
         {
             case "1":
-                System.out.println("Let's add and employee!!!"); //testing manager
-                // cant actually add an employee because we
-                // just created a new employee here that has an empty array.
                 Employee addEmployee = new Employee();
                 addEmployee.addEmployee();
                 Manager.managerMenu();
                 break;
             case "2":
-                System.out.println("Remove an employee");
-                // cant actually remove an employee because we
-                // just created a new employee here that has an empty array.
                 Employee removeOne = new Employee();
-                removeOne.removeEmployee(removeOne.getEmployeeID());
+                removeOne.removeEmployee();
                 Manager.managerMenu();
                 break;
             case "3":
                 System.out.println("Let's view all employee");
                 Employee viewEmployees = new Employee();
-                // cant display all employees because your calling an employee who
-                // doesnt have anything in their array because you just created here...
                 viewEmployees.viewEmployees();
                 Manager.managerMenu();
                 break;
