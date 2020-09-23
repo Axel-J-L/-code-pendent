@@ -9,7 +9,7 @@ public class Employee {
     private int birthYear;
     private String address;
     private double grossSalary;
-    private static Employee[] employees =  new Employee[4];
+    private Employee[] employees =  new Employee[4];
 
 
     private final double MIN_SALARY=100000.00;
@@ -33,7 +33,8 @@ public class Employee {
     }
 
     /*==========================Add Employee=========================*/
-// this is how i think it should be done... -(D) but in a different class that is actually responsible for keep track of employees...
+//  this is how i think it should be done... -(D) but in a different class.
+
 //        public Employee[] addEmployee(Employee employee, Employee[] employeeArr) {
 //            for (int i = 0; i < employeeArr.length; i++) {
 //                if (employeeArr[i] != null) {
@@ -81,7 +82,8 @@ public class Employee {
 
 
     /*==========================Remove Employee=========================*/
-//                Once again this is how i believe it should be done but in a different class (cough cough manager cough cough)
+//                                        i believe it should be done but in a different class
+
 //                public Employee[] removeEmployee (UUID employeeID, Employee[]employeeArr){
 //                    for (int i = 0; i < employeeArr.length; i++) { // goes through the array fed into method
 //                        if (employeeArr[i] == null) continue;
@@ -152,7 +154,8 @@ public class Employee {
         Boolean authSuccess = Authorize.authenticate(password);
 
         if (authSuccess) {
-            EmployeeMenu.employeeMenu();
+            EmployeeMenu employeeMenu = new EmployeeMenu();
+            employeeMenu.employeeMenu();
         } else {
             System.out.println("\n>>> Wrong password <<< \n");
             DartController mainMenu = new DartController();
@@ -163,7 +166,7 @@ public class Employee {
 
     public void viewEmployees() {
         System.out.println("\n>>> These are all the employees <<<");
-        for (Employee employee : employees) {
+        for (Employee employee : employees) { // for-each loop
             if (employee == null) return;
             System.out.println(employee.toString());
         }
