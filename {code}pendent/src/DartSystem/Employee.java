@@ -69,7 +69,7 @@ public class Employee {
         helper.input.nextLine();
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null) {
-                continue;
+                continue; //starts the loop over until you get = null
             } else {
                 employees[i] = new Employee(name, birthYear, address, salary);
                 System.out.println(employees[i].toString());
