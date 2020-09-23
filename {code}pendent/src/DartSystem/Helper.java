@@ -58,14 +58,6 @@ public class Helper {
         return this.userInput; // Returns user's menu choice back to called class
     }
 
-    public void printArray(String[] pArray[]) {
-
-        for (String[] element : pArray) {
-            System.out.println(element);
-        }
-
-        // TODO implement here
-    }
 
 //    // asks for password and then returns value
 //    // (would like to implement authentication and hide password)
