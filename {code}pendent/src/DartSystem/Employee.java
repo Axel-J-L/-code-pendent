@@ -16,6 +16,8 @@ public class Employee {
     private final double  BONUS_LOW=4000.00;
     private final double BONUS_MEDIUM=6000.00;
     private final double BONUS_HIGH=7500.00;
+    private final int FIRST_AGE_FOR_BONUS=22;
+    private final int SECOND_AGE_FOR_BONUS=30;
 
     Helper helper = new Helper();
 
@@ -192,15 +194,15 @@ public class Employee {
             }
         }
         double bonus;
-        if (age < 22) { // change to not be magic numbers instead constant - (n)
+        if (age < FIRST_AGE_FOR_BONUS) { // change to not be magic numbers instead constant - (n)
             bonus = BONUS_LOW;
             netSalary = netSalary + bonus;
             System.out.print("Employee's net salary with bonus :" + netSalary);
-        } else if (age == 22 && age < 30) { // change to not be magic numbers instead constant - (n)
+        } else if (age == FIRST_AGE_FOR_BONUS && age < SECOND_AGE_FOR_BONUS) {
             bonus = BONUS_MEDIUM;
             netSalary = netSalary + bonus;
             System.out.print("Employee's net salary with bonus :" + netSalary);
-        } else if (age > 30) { // change to not be magic numbers instead constant - (n)
+        } else if (age > SECOND_AGE_FOR_BONUS) {
             bonus = BONUS_HIGH;
             netSalary = netSalary + bonus;
             System.out.print("Employee's net salary with bonus :" + netSalary);
