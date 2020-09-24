@@ -15,12 +15,10 @@ public class CustomerMenu {
         switch(mInput.toLowerCase())
         {
             case "1":
-                System.out.println("Looking for a game?");
                 Rental toRent=new Rental();
                 toRent.rentGame();
                 break;
             case "2":
-                System.out.println("You took it a year ago?!");
                 Rental toReturn=new Rental();
                 toReturn.returnGame();
                 break;
