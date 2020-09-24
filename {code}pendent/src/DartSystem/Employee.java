@@ -67,13 +67,14 @@ public class Employee {
         String address = helper.input.nextLine();
 
         System.out.print("Monthly gross salary: ");
-        double salary = helper.input.nextDouble();
+        double monthlySalary = helper.input.nextDouble();
+        grossSalary = monthlySalary * 12;
         helper.input.nextLine();
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null) {
                 continue; //starts the loop over until you get = null
             } else {
-                employees[i] = new Employee(name, birthYear, address, salary);
+                employees[i] = new Employee(name, birthYear, address, grossSalary);
                 System.out.println(employees[i].toString());
                 i = employees.length;
                 //break; // I WILL FIGHT YOU
@@ -193,15 +194,10 @@ public class Employee {
     }
 
 
-    public void salary() {
-        Helper input = new Helper();
-        String askBirthYear = "Employee birth year: ";
-        this.birthYear = input.getInt(askBirthYear);
+    public double netSalary() {
         Helper year = new Helper();
         int age = year.CURRENT_YEAR - birthYear;
         double netSalary = 0;
-
-
         //public static final double MIN_SALARY=100000.00;
         if (grossSalary < MIN_SALARY) {
             netSalary = grossSalary;
@@ -215,17 +211,14 @@ public class Employee {
         if (age < FIRST_AGE_FOR_BONUS) {
             bonus = BONUS_LOW;
             netSalary = netSalary + bonus;
-            System.out.print("Employee's net salary with bonus :" + netSalary);
         } else if (age == FIRST_AGE_FOR_BONUS && age < SECOND_AGE_FOR_BONUS) {
             bonus = BONUS_MEDIUM;
             netSalary = netSalary + bonus;
-            System.out.print("Employee's net salary with bonus :" + netSalary);
         } else if (age > SECOND_AGE_FOR_BONUS) {
             bonus = BONUS_HIGH;
             netSalary = netSalary + bonus;
-            System.out.print("Employee's net salary with bonus :" + netSalary);
         }
-
+        return netSalary / 12;
     }
     // getters
     public String getName() {
@@ -235,7 +228,7 @@ public class Employee {
 
     public double getSalary() {
 
-        return grossSalary;
+        return netSalary();
     }
 
     public int getBirthYear() {
@@ -265,7 +258,7 @@ public class Employee {
 
     public String toString() {
         return "\nNew Employee:\nID: " + this.employeeID + "\nName: " + this.name + "\nBirth year: " + this.birthYear
-                + "\nAddress: " + this.address + "\nMonthly gross salary: " + this.grossSalary + "\n";
+                + "\nAddress: " + this.address + "\nNet salary: " + netSalary() + "\n";
     }
 }
 
