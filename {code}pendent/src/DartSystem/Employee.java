@@ -26,11 +26,11 @@ public class Employee {
     }
 
     public Employee(String name, int birthYear, String address, double salary) {
+        this.employeeID = genEmployeeUUID();
         this.name = name;
         this.grossSalary = salary;
         this.birthYear = birthYear;
         this.address = address;
-        this.employeeID = genEmployeeUUID();
 
     }
 
@@ -134,6 +134,25 @@ public class Employee {
                 System.out.println("no employee with that UUID exists."); // doesnt reach this statement
             }
         }
+// would like to change the above nested if mess to switch
+//        switch (enteredUUID) {
+//            case "1":
+//                break;
+//            case "2":
+//                break;
+//            case "3":
+//                break;
+//            case "4":
+//                break;
+//            case "5":
+//                break;
+//            case "6":
+//                break;
+//            case "7":
+//                break;
+//            default: System.out.println("no match");
+//                break;
+//        }
 
         for (int j = 0; j < employees.length - 1; j++) { //runs through the array
             if (employees[j] != (null) && employees[j + 1] != null) { // position j != null && position j+1 != null
@@ -158,7 +177,7 @@ public class Employee {
             EmployeeMenu employeeMenu = new EmployeeMenu();
             employeeMenu.employeeMenu();
         } else {
-            System.out.println("\n>>> Wrong password <<< \n");
+            System.out.println("\n*** Wrong password ***\n");
             DartController mainMenu = new DartController();
             mainMenu.DartController();
         }
@@ -193,7 +212,7 @@ public class Employee {
             }
         }
         double bonus;
-        if (age < FIRST_AGE_FOR_BONUS) { // change to not be magic numbers instead constant - (n)
+        if (age < FIRST_AGE_FOR_BONUS) {
             bonus = BONUS_LOW;
             netSalary = netSalary + bonus;
             System.out.print("Employee's net salary with bonus :" + netSalary);
