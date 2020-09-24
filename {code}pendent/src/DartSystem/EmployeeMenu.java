@@ -18,37 +18,42 @@ public class EmployeeMenu {
         String userInput = getInput.getMenuInput("Please enter your choice: ", employeeMenuAcceptSet); // using argument to call Helper method/A
 
         switch (userInput.toLowerCase()) {
-            case "1" -> {
+            case "1":
                 System.out.println("Register a game");
                 Game addProcess = new Game();
                 addProcess.addNewGame();
-            }
-            case "2" -> {
+                break;
+            case "2":
                 System.out.println("Remove game");
                 Game removeProcess = new Game();
                 removeProcess.removeGame();
-            }
-            case "3" -> {
+                break;
+            case "3":
                 System.out.println("Register a customer");
                 Customer menuWorker = new Customer();
-                menuWorker.addCustomer(); // has not been implemented
-            }
-            case "4" -> {
+                menuWorker.addCustomer();
+                break;
+            case "4":
                 System.out.println("Remove customer: ");
                 Customer menuWorker2 = new Customer();
                 menuWorker2.removeCustomer();
-            }
-            case "5" -> System.out.println("Show total rent profit");
-            case "6" -> {
+                break;
+            case "5": System.out.println("Show total rent profit");
+                System.out.println("To be implemented ");
+                break;
+            case "6":
                 System.out.println("View all games: ");
                 Game viewProcess = new Game();
                 viewProcess.viewAll();
-            }
-            case "7" -> {
+
+                break;
+            case "7":
                 System.out.println("Return to main menu: ");
                 DartController.DartController();
-            }
-            default -> System.out.println("no match");
+
+                break;
+            default: System.out.println("no match");
+                break;
         }
     }
 }
