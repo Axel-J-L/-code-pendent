@@ -1,11 +1,6 @@
 package DartSystem;
 
-public class Manager {
-
-    // Default Constructor
-    public Manager() {
-    }
-
+public class ManagerMenu {
     public static void managerMenu() {
         // TODO make not static
         System.out.println("\nManager Screen - Type one of the options below:");
@@ -41,24 +36,6 @@ public class Manager {
                 DartController.DartController();
             default:
                 System.out.println("no match");
-        }
-    }
-
-
-    //  changed this password authenticator to work for both employee and manager and customer if needed later. (d)
-    //had to remove reference to menus at this time since the menus are currently static (d)
-    public static void authManager() {
-            String password = "admin1234";
-            Helper Authorize = new Helper();
-            Boolean authSuccess = Authorize.authenticate(password);
-
-        if ( authSuccess ) {
-            Manager mngr5 = new Manager();
-            mngr5.managerMenu();
-        } else {
-            System.out.println("\n*** Wrong password *** \n");
-            DartController dart2 = new DartController();
-            dart2.DartController();
         }
     }
 }

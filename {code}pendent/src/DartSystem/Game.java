@@ -2,6 +2,7 @@ package DartSystem;
 
 import java.util.Scanner;
 import java.util.UUID;
+import java.util.Date;
 
 public class Game {
 
@@ -10,15 +11,13 @@ public class Game {
     private String genre;
     private double rentCost;
     private boolean isRented;
+    private Date lastRentalDate;
 
     private static Game[] games = { new Game("It is this", "Comedy", 12, true),
             new Game("Brainfreeze", "Comedy", 12, true),
             new Game("Give and take", "Comedy", 12, true),
             new Game("Pineapples", "Comedy", 12, false) };
 
-    /**
-     * Default constructor
-     */
     Game(){
     }
 
@@ -28,6 +27,7 @@ public class Game {
         this.title = gameTitle;
         this.rentCost = gameRentCost;
         this.isRented = false;
+        this.lastRentalDate = null;
     }
 
 
@@ -37,10 +37,57 @@ public class Game {
         this.genre = gameGenre;
         this.rentCost = gameRentCost;
         this.isRented = gameIsRented;
+        this.lastRentalDate = null;
+    }
+
+    public String getTitle(){
+        return title;
+    }
+
+    public void setTitle(String title){
+         this.title = title;
+    }
+
+    public String getGenre(){
+        return genre;
+    }
+
+    public void setGenre(String title){
+        this.genre = genre;
+    }
+
+    public double getRentCost(){
+        return rentCost;
+    }
+
+    public void setRentCost(String title){
+        this.rentCost= rentCost;
+    }
+
+    public String getIsRented(){
+        if (isRented){
+            return "Out on rent";
+        } else return "Available";
+    }
+
+    public void setIsRented(boolean isRented){
+        this.isRented = isRented;
+    }
+
+    public void increaseArray(){
+
+            Game[] gamesNew = new Game[games.length + (games.length/2)];
+            for (int i = 0; i < games.length; i++) {
+                gamesNew[i] = games[i];
+            }
+            games = gamesNew;
+
     }
 
     public void addNewGame() {
-        // TODO make not static
+        if (games[games.length - 1] != null) {
+            increaseArray();
+        }
         Scanner newGameInput = new Scanner(System.in); //Opened scanner here as 3 inputs are required so I think it isn't best to open scanner for each one in helper..
 
         System.out.print("Title of Game? :  ");
@@ -53,28 +100,22 @@ public class Game {
         double newGameRentCost = newGameInput.nextDouble();
         newGameInput.nextLine();
 
-        Game[] gamesNew = new Game[games.length + (games.length/2)];
-
-        for (int i = 0; i < games.length; i++) {
-            gamesNew[i] = games[i];
-        }
-        gamesNew[games.length] = new Game(newGameTitle, newGameGenre, newGameRentCost);
-
-        games = gamesNew;
-
         int countArray = 0;
         for (int i = 0; games[i] != null; i++){
-            countArray = i;
+            countArray = i + 1;
         }
+
+        games[countArray] = new Game(newGameTitle, newGameGenre, newGameRentCost);
         System.out.println("Game Added Successfully : " + "\n" + games[countArray].id + " : " + games[countArray].title + " (" + games[countArray].genre + "). " + games[countArray].rentCost
                 + "kr. " + "Status: " + games[countArray].isRented + "\n");
 
-        viewAll();
-        System.out.println("1) Employee Menu " + "\n" + "2) Add another game");
+        System.out.println("1) Add another game" + "\n" + "2) View all games" + "\n" + "3) Employee Menu");
         int userChoice = newGameInput.nextInt();
-        if (userChoice == 1){
-            EmployeeMenu.employeeMenu();
-        } else addNewGame();
+        if (userChoice == 1) {
+            addNewGame();
+        } else if (userChoice == 2) {
+            viewAll();
+        } else EmployeeMenu.employeeMenu();
       newGameInput.close();
     }
 
@@ -85,12 +126,14 @@ public class Game {
         for (int i = 0; i < games.length; i++) {
             if (games[i].title.equalsIgnoreCase(gameTitle)) {
                 for (int j = i + 1; j < games.length + 1; j++) {
-                    if (i == games.length - 1) {
-                        games[i] = null;
-                    } else {
-                        games[i] = games[j];
-                        i++;
-                    }
+                    if (games[i].isRented == false) {
+                        if (i == games.length - 1) {
+                            games[i] = null;
+                        } else {
+                            games[i] = games[j];
+                            i++;
+                        }
+                    } else System.out.println("Game has to be returned before it can be removed from the system.");
                 }
             }
         }

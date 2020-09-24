@@ -58,14 +58,6 @@ public class Helper {
         return this.userInput; // Returns user's menu choice back to called class
     }
 
-    public void printArray(String[] pArray[]) {
-
-        for (String[] element : pArray) {
-            System.out.println(element);
-        }
-
-        // TODO implement here
-    }
 
 //    // asks for password and then returns value
 //    // (would like to implement authentication and hide password)
@@ -77,18 +69,9 @@ public class Helper {
 //        return userPass;  // Output user input
 //    }
 
-    public Boolean Authenticator(String password) { // authenticates passwords
-        Boolean authSuccess = false;
-        String enteredPassword = getInput("Please enter your password: ");
-
-        // checks both the manager and the employee passwords to see if you entered correct
-        // I think it will work but not 100% sure (D)
-        if (password.equals(enteredPassword)) {
-            authSuccess = Boolean.TRUE;
-        } else {
-            authSuccess = Boolean.FALSE;
-        }
-        return authSuccess;
+    public boolean authenticate(String password) { // authenticates passwords
+        String enteredPassword = getInput("Enter your password: ");
+        return password.equals(enteredPassword);
     }
     /*======================Array Increment/Reformat=======================*/
     public Employee[] increaseEmployeeArr(Employee[] array) { //Employee[] arr is our throw away array to bridge data into Employee[] newEmployeeArr
@@ -100,6 +83,7 @@ public class Helper {
     }
 
     public Employee[] trimArray(Employee[] array){
+        if (array.length == 0) return array;
         int position = 0;
         for (int i = 0; i < array.length; i++){
             if (array[i] != null){
@@ -108,10 +92,10 @@ public class Helper {
         }
         Employee[] newEmployeeArr = new Employee[(int) (position)];
         for (int i = 0; i < array.length; i++) { // loops for copying.
+            if (array[i] == null) continue;
             newEmployeeArr[i] = array[i]; // copys the information from fed in array to newEmployee array
         }
-        return newEmployeeArr; // returns our new and fancy larger array with same values as the one fed into the method
+        return newEmployeeArr; // returns our new and fancy array with no nulls with same values as the one fed into the method
     }
 }
-
 
