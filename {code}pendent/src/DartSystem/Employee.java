@@ -9,7 +9,7 @@ public class Employee {
     private int birthYear;
     private String address;
     private double grossSalary;
-    private Employee[] employees =  new Employee[4];
+    private static Employee[] employees =  new Employee[4];
 
 
     private final double MIN_SALARY=100000.00;
@@ -186,10 +186,9 @@ public class Employee {
 
 
     public void viewEmployees() {
-        System.out.println("\n>>> These are all the employees <<<");
         for (Employee employee : employees) { // for-each loop
             if (employee == null) return;
-            System.out.println(employee.toString());
+                System.out.println(employee.toString());
         }
     }
 
@@ -257,7 +256,7 @@ public class Employee {
     }
 
     public String toString() {
-        return "\nNew Employee:\nID: " + this.employeeID + "\nName: " + this.name + "\nBirth year: " + this.birthYear
+        return "\nEmployee:\nID: " + this.employeeID + "\nName: " + this.name + "\nBirth year: " + this.birthYear
                 + "\nAddress: " + this.address + "\nNet salary: " + netSalary() + "\n";
     }
 }
