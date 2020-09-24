@@ -9,7 +9,7 @@ private UUID  customerId;
 private String firstName;
 private String lastName;
 
-private Customer[] customerList={ new Customer("Vernita","hdkjn"),new Customer("Navya","pulikanla")};
+private static Customer[] customerList={ new Customer("Vernita","hdkjn"),new Customer("Navya","pulikanla")};
 
     // Default Constructor
      Customer() {
@@ -53,8 +53,8 @@ private Customer[] customerList={ new Customer("Vernita","hdkjn"),new Customer("
 
     public void addCustomer() {
         // TODO make not static
-        System.out.println("Add a customer here");
         Scanner newCustomer=new Scanner(System.in);
+        System.out.println("Add a customer here");
         System.out.print("Enter the customers first name: ");
         String cusFirstName=newCustomer.nextLine();
         System.out.print("Enter the customers last name: ");
@@ -86,9 +86,29 @@ private Customer[] customerList={ new Customer("Vernita","hdkjn"),new Customer("
 
 
 
+
     public static void removeCustomer() {
         // TODO make not static
-        System.out.println("Remove a customer here");
+
+        Scanner remCustomer=new Scanner(System.in);
+        System.out.println("Remove a customer here by entering their ID : ");
+        String cusIdToRemove=remCustomer.nextLine();
+        UUID customerId = UUID.fromString(cusIdToRemove);
+
+       for (int i=0;i < customerList.length ;i++){
+         if(customerList[i].customerId.equals(cusIdToRemove)) {
+            for(int j = i+1 ;j < customerList.length + 1; j++){
+                if(i==customerList.length-1){
+                    customerList[i]= null;
+         } else {
+                    System.out.print("Customer with id " + cusIdToRemove + " not found.");
+                }
+
+
+        }
+
+
+
     }
 
-}
+}}}
