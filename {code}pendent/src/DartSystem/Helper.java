@@ -18,7 +18,7 @@ public class Helper {
     // THIS ONE IS SUPER USEFUL USE IT! something with opening and closing the scanner break swapping between menus (Drake)
     public String getInput(String message) { // Method to get string input from user and return
 
-        System.out.print(message); //removed println and replaced with print (D) if we need and println version we'll make one
+        System.out.print(message);
         String userInput = input.nextLine();  // Read user input
         // scanner.close(); // Close scanner - This causes issue, leave it commented out (Altan)
         return userInput;  // Output user input

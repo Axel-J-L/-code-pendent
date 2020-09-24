@@ -3,14 +3,21 @@ import java.time.Year;
 import java.util.UUID;
 
 public class Employee {
-
-    private UUID employeeID;
+    private int employeeID;
     private String name;
     private int birthYear;
     private String address;
     private double grossSalary;
     private static Employee[] employees =  new Employee[4];
 
+
+//    // test box
+//    private static Employee[] employees = {
+//            new Employee("bob", 1948, "a place", 19456),
+//            new Employee("todd", 1977, "some place", 13973),
+//            new Employee("jenny", 1748, "who knows what place", 15673),
+//            new Employee("samantha", 1458, "lost as fuck", 14353)
+//    };
 
     private final double MIN_SALARY=100000.00;
     private final double  BONUS_LOW=4000.00;
@@ -26,7 +33,7 @@ public class Employee {
     }
 
     public Employee(String name, int birthYear, String address, double salary) {
-        this.employeeID = genEmployeeUUID();
+        this.employeeID = genEmployeeID();
         this.name = name;
         this.grossSalary = salary;
         this.birthYear = birthYear;
@@ -49,11 +56,23 @@ public class Employee {
 //            }
 //            return employeeArr;
 //        }
+    private int genEmployeeID() {
+        int newID = 1;
+        for (int i = 0; i < employees.length; i++){
+            if (employees[i] == null){
+                continue;
+            }
+            if (employees[i] != null){
+                newID = employees[i].getEmployeeID() + 1;
+            }
+        }
+        return newID;
+    }
+
 
     public void addEmployee() {
-
         if (employees[employees.length - 1] != null) {
-            helper.increaseEmployeeArr(employees);
+            employees = helper.increaseEmployeeArr(employees);
         }
         System.out.print("Creating an Employee. Please type the Employee’s:\n");
         System.out.print("Name: ");
@@ -115,46 +134,25 @@ public class Employee {
 
     public Employee[] removeEmployee() {
         viewEmployees();
-        boolean exists = false;
         System.out.print("Which employee should be removed? ID: ");
-        UUID enteredUUID = UUID.fromString(helper.input.nextLine());
+        int enteredID = Helper.input.nextInt();
         for (int i = 0; i < employees.length; i++) { // goes through the array fed into method
             String deletedName = "";
-            if (employees[i] == null) continue;
-            if (!employees[i].getEmployeeID().equals(enteredUUID)) { //  it doesnt equal our employee to remove do nothing.
-                continue;
-            } else {
+            if (employees[i] == null) {
+                System.out.println("No employees");
+                Manager menu = new Manager();
+                i = employees.length;
+            } else if (employees[i].getEmployeeID() != enteredID) { //  it doesnt equal our employee to remove do nothing.
+                System.out.println("invalid ID");
+            } else { // this is where we delete the employee
                 deletedName = employees[i].getName();
-                employees[i] = null; // if it does have the employee we want to remove. (Ternary statement?)
-                exists = true;
+                employees[i] = null;
+                System.out.println("\nEmployee " + deletedName + " removed.");
                 i = employees.length;
             }
-            if (exists) {
-                System.out.println("\nEmployee " + deletedName + " removed.");
-            } else {
-                System.out.println("no employee with that UUID exists."); // doesnt reach this statement
-            }
         }
-// would like to change the above nested if mess to switch
-//        switch (enteredUUID) {
-//            case "1":
-//                break;
-//            case "2":
-//                break;
-//            case "3":
-//                break;
-//            case "4":
-//                break;
-//            case "5":
-//                break;
-//            case "6":
-//                break;
-//            case "7":
-//                break;
-//            default: System.out.println("no match");
-//                break;
-//        }
 
+        // this actually deletes the employee
         for (int j = 0; j < employees.length - 1; j++) { //runs through the array
             if (employees[j] != (null) && employees[j + 1] != null) { // position j != null && position j+1 != null
                 continue; //do nothing
@@ -165,7 +163,7 @@ public class Employee {
                 j = employees.length; // only other situation would be position j && j+1 == null which means the array has two nulls in a row
             }
         }
-        helper.trimArray(employees);
+        employees = helper.trimArray(employees);
         return employees;
     }
 
@@ -240,7 +238,7 @@ public class Employee {
         return address;
     }
 
-    public UUID getEmployeeID() {
+    public int getEmployeeID() {
 
         return employeeID;
     }
@@ -248,11 +246,6 @@ public class Employee {
     public Employee[] getEmployees() {
 
         return employees;
-    }
-
-    private UUID genEmployeeUUID() {
-
-        return UUID.randomUUID();
     }
 
     public String toString() {
