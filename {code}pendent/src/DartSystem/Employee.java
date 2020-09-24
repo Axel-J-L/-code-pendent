@@ -55,18 +55,18 @@ public class Employee {
         if (employees[employees.length - 1] != null) {
             helper.increaseEmployeeArr(employees);
         }
-
-        System.out.print("Enter new employee's name: ");
+        System.out.print("Creating an Employee. Please type the Employee’s:\n");
+        System.out.print("Name: ");
         String name = helper.input.nextLine();
 
-        System.out.print("Enter new employee's year of birth: ");
+        System.out.print("Birth year: ");
         int birthYear = helper.input.nextInt();
         helper.input.nextLine();
 
-        System.out.print("Enter new employee's address: ");
+        System.out.print("Address: ");
         String address = helper.input.nextLine();
 
-        System.out.print("Enter new employee's gross salary: ");
+        System.out.print("Monthly gross salary: ");
         double salary = helper.input.nextDouble();
         helper.input.nextLine();
         for (int i = 0; i < employees.length; i++) {
@@ -115,7 +115,7 @@ public class Employee {
     public Employee[] removeEmployee() {
         viewEmployees();
         boolean exists = false;
-        System.out.print("Employee UUID to remove: ");
+        System.out.print("Which employee should be removed? ID: ");
         UUID enteredUUID = UUID.fromString(helper.input.nextLine());
         for (int i = 0; i < employees.length; i++) { // goes through the array fed into method
             String deletedName = "";
@@ -129,7 +129,7 @@ public class Employee {
                 i = employees.length;
             }
             if (exists) {
-                System.out.println("\n¤ Employee " + deletedName + " removed.");
+                System.out.println("\nEmployee " + deletedName + " removed.");
             } else {
                 System.out.println("no employee with that UUID exists."); // doesnt reach this statement
             }
@@ -150,7 +150,6 @@ public class Employee {
     }
 
     public static void authEmployee() {
-        // TODO get fully fuctioning with no errors (see above comments)
         String password = "password123";
         Helper Authorize = new Helper();
         Boolean authSuccess = Authorize.authenticate(password);
@@ -246,7 +245,8 @@ public class Employee {
     }
 
     public String toString() {
-        return "\n¤ Name: " + this.name + ", UUID: " + this.employeeID + "\n";
+        return "\nNew Employee:\nID: " + this.employeeID + "\nName: " + this.name + "\nBirth year: " + this.birthYear
+                + "\nAddress: " + this.address + "\nMonthly gross salary: " + this.grossSalary + "\n";
     }
 }
 
