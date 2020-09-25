@@ -1,7 +1,10 @@
 package DartSystem;
 import DartSystem.Game;
 
-import java.util.*;
+import java.time.LocalDate;
+import java.util.UUID;
+import static java.time.temporal.ChronoUnit.DAYS;
+
 
 public class Rental {
 
@@ -10,7 +13,7 @@ public class Rental {
     private String genre;
     private double rentCost;
     private boolean isRented;
-    private Date lastRentalDate;
+    private LocalDate rentedDate;
 
     private static double rentalIncome = 25.00;
 
@@ -51,6 +54,7 @@ public class Rental {
 
         if (isFound == true && rentalStatus == false){
             rental[idMatch].setIsRented(true);
+            rental[idMatch].setRentedDate(LocalDate.now());
             System.out.println("Game rented now");
         } else if (isFound == true && rentalStatus == true){
             System.out.println("Game is already rented.");
@@ -62,10 +66,9 @@ public class Rental {
     }
 
     public void returnGame() {
-
-        int rentId = getInput.getInt("Enter the ID of the game would you like to return: ");
-        int daysRented = getInput.getInt("Enter number of days that you rented: ");
+        String rentId = getInput.getInput("Enter the ID of the game would you like to return: ");
         int idMatch = -1;
+        long daysRented = 0;
         Boolean rentalStatus = false;
         Boolean isFound = false;
         double dailyRate = 0;
@@ -73,6 +76,7 @@ public class Rental {
 
         for (int i = 0; i < rental.length;i++) {
             if (rental[i].getId().equals(rentId)) {
+                daysRented = DAYS.between( rental[i].getRentedDate(), LocalDate.now());
                 isFound = true;
                 idMatch = i;
                 rentalStatus = rental[i].getIsRented();
@@ -98,12 +102,6 @@ public class Rental {
         System.out.println("Rental income to-date is: " + getRentalIncome() + " SEK\n");
 
         EmployeeMenu.employeeMenu();
-    }
-
-    public String toString(){
-        String outputString = this.id + " : " + this.title + " (" + this.genre + "). " + this.rentCost
-                + "kr. " + "Status: "+ "\n";
-        return outputString;
     }
 
     /**

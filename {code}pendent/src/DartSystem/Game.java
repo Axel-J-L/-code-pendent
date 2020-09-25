@@ -42,7 +42,9 @@ public class Game {
         this.genre = gameGenre;
         this.rentCost = gameRentCost;
         this.isRented = gameIsRented;
-        this.rentedDate = null;
+        if (gameIsRented) {
+            this.rentedDate =  LocalDate.of( 2020 , 8 , 23 );
+        }else  this.rentedDate = null;
     }
 
     public static Game[] getGames(){
@@ -87,6 +89,13 @@ public class Game {
 
     public void setIsRented(boolean isRented){
         this.isRented = isRented;
+    }
+    public LocalDate getRentedDate(){
+        return rentedDate;
+    }
+
+    public void setRentedDate(LocalDate rentedDate){
+        this.rentedDate = rentedDate;
     }
 
     public void increaseArray(){
