@@ -103,12 +103,12 @@ public class Game {
     }
 
     public void addNewGame() {
-        int idCounter = games.length + 1;
         if (games[games.length - 1] != null) {
             increaseArray();
         }
 
-        System.out.println("* suggestion ID - " + idCounter + " *");
+        int idCounter = games.length + 1;
+        System.out.println("* Suggested ID - " + idCounter + " *");
         System.out.print("ID:  ");
         int newGameID = helper.input.nextInt();
         helper.input.nextLine();

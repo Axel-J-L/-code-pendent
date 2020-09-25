@@ -30,7 +30,7 @@ public class DartController {
                 employeeMenu.employeeMenu();
                 break;
             case "c":
-                Customer.customerMenu();
+                CustomerMenu.customerMenu();
                 break;
             case "x":
                 System.out.println("Exiting system ...");
