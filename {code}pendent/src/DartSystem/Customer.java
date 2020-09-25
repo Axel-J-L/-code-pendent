@@ -86,18 +86,22 @@ public class Customer {
                     customerList[i] = customerList[j];
                     i++;
                 }
+                int arrayCount = 0;
                 for (int k = 0; k < customerList.length; k++){
-                    int arrayCount = 0;
                     if (customerList[k] != null){
                         arrayCount++;
                     }
-                    customerList[arrayCount] = null;
+
                 }
+                customerList[arrayCount-1] = null;
             }
         }
         System.out.println("Customer Removed");
-        for (int i = 0; i < customerList.length; i++)
-        System.out.println(customerList[i].toString());
+        for (int i = 0; i < customerList.length; i++) {
+            if (customerList[i]!=null){
+                System.out.println(customerList[i].toString());
+        }
+        }
         EmployeeMenu.employeeMenu();
         }
     }
