@@ -23,18 +23,18 @@ public class Manager {
             case "1":
                 Employee addEmployee = new Employee();
                 addEmployee.addEmployee();
-                Manager.managerMenu();
+                managerMenu();
                 break;
             case "2":
                 Employee removeOne = new Employee();
                 removeOne.removeEmployee();
-                Manager.managerMenu();
+                managerMenu();
                 break;
             case "3":
-                System.out.println("Let's view all employee");
+                System.out.println("All employees");
                 Employee viewEmployees = new Employee();
                 viewEmployees.viewEmployees();
-                Manager.managerMenu();
+                managerMenu();
                 break;
             case "4":
                 System.out.println("Return to main menu: ");

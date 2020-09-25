@@ -3,14 +3,21 @@ import java.time.Year;
 import java.util.UUID;
 
 public class Employee {
-
-    private UUID employeeID;
+    private int employeeID;
     private String name;
     private int birthYear;
     private String address;
     private double grossSalary;
-    private Employee[] employees =  new Employee[4];
+    private static Employee[] employees =  new Employee[4];
 
+
+//    // test box
+//    private static Employee[] employees = {
+//            new Employee("bob", 1948, "a place", 19456),
+//            new Employee("todd", 1977, "some place", 13973),
+//            new Employee("jenny", 1748, "who knows what place", 15673),
+//            new Employee("samantha", 1458, "lost as fuck", 14353)
+//    };
 
     private final double MIN_SALARY=100000.00;
     private final double  BONUS_LOW=4000.00;
@@ -26,11 +33,11 @@ public class Employee {
     }
 
     public Employee(String name, int birthYear, String address, double salary) {
+        this.employeeID = genEmployeeID();
         this.name = name;
         this.grossSalary = salary;
         this.birthYear = birthYear;
         this.address = address;
-        this.employeeID = genEmployeeUUID();
 
     }
 
@@ -49,11 +56,23 @@ public class Employee {
 //            }
 //            return employeeArr;
 //        }
+    private int genEmployeeID() {
+        int newID = 1;
+        for (int i = 0; i < employees.length; i++){
+            if (employees[i] == null){
+                continue;
+            }
+            if (employees[i] != null){
+                newID = employees[i].getEmployeeID() + 1;
+            }
+        }
+        return newID;
+    }
+
 
     public void addEmployee() {
-
         if (employees[employees.length - 1] != null) {
-            helper.increaseEmployeeArr(employees);
+            employees = helper.increaseEmployeeArr(employees);
         }
         System.out.print("Creating an Employee. Please type the Employee’s:\n");
         System.out.print("Name: ");
@@ -67,13 +86,14 @@ public class Employee {
         String address = helper.input.nextLine();
 
         System.out.print("Monthly gross salary: ");
-        double salary = helper.input.nextDouble();
+        double monthlySalary = helper.input.nextDouble();
+        grossSalary = monthlySalary * 12;
         helper.input.nextLine();
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null) {
                 continue; //starts the loop over until you get = null
             } else {
-                employees[i] = new Employee(name, birthYear, address, salary);
+                employees[i] = new Employee(name, birthYear, address, grossSalary);
                 System.out.println(employees[i].toString());
                 i = employees.length;
                 //break; // I WILL FIGHT YOU
@@ -114,27 +134,25 @@ public class Employee {
 
     public Employee[] removeEmployee() {
         viewEmployees();
-        boolean exists = false;
         System.out.print("Which employee should be removed? ID: ");
-        UUID enteredUUID = UUID.fromString(helper.input.nextLine());
+        int enteredID = Helper.input.nextInt();
         for (int i = 0; i < employees.length; i++) { // goes through the array fed into method
             String deletedName = "";
-            if (employees[i] == null) continue;
-            if (!employees[i].getEmployeeID().equals(enteredUUID)) { //  it doesnt equal our employee to remove do nothing.
-                continue;
-            } else {
-                deletedName = employees[i].getName();
-                employees[i] = null; // if it does have the employee we want to remove. (Ternary statement?)
-                exists = true;
+            if (employees[i] == null) {
+                System.out.println("No employees");
+                Manager menu = new Manager();
                 i = employees.length;
-            }
-            if (exists) {
+            } else if (employees[i].getEmployeeID() != enteredID) { //  it doesnt equal our employee to remove do nothing.
+                System.out.println("invalid ID");
+            } else { // this is where we delete the employee
+                deletedName = employees[i].getName();
+                employees[i] = null;
                 System.out.println("\nEmployee " + deletedName + " removed.");
-            } else {
-                System.out.println("no employee with that UUID exists."); // doesnt reach this statement
+                i = employees.length;
             }
         }
 
+        // this actually deletes the employee
         for (int j = 0; j < employees.length - 1; j++) { //runs through the array
             if (employees[j] != (null) && employees[j + 1] != null) { // position j != null && position j+1 != null
                 continue; //do nothing
@@ -145,7 +163,7 @@ public class Employee {
                 j = employees.length; // only other situation would be position j && j+1 == null which means the array has two nulls in a row
             }
         }
-        helper.trimArray(employees);
+        employees = helper.trimArray(employees);
         return employees;
     }
 
@@ -158,7 +176,7 @@ public class Employee {
             EmployeeMenu employeeMenu = new EmployeeMenu();
             employeeMenu.employeeMenu();
         } else {
-            System.out.println("\n>>> Wrong password <<< \n");
+            System.out.println("\n*** Wrong password ***\n");
             DartController mainMenu = new DartController();
             mainMenu.DartController();
         }
@@ -166,23 +184,17 @@ public class Employee {
 
 
     public void viewEmployees() {
-        System.out.println("\n>>> These are all the employees <<<");
         for (Employee employee : employees) { // for-each loop
             if (employee == null) return;
-            System.out.println(employee.toString());
+                System.out.println(employee.toString());
         }
     }
 
 
-    public void salary() {
-        Helper input = new Helper();
-        String askBirthYear = "Employee birth year: ";
-        this.birthYear = input.getInt(askBirthYear);
+    public double netSalary() {
         Helper year = new Helper();
         int age = year.CURRENT_YEAR - birthYear;
         double netSalary = 0;
-
-
         //public static final double MIN_SALARY=100000.00;
         if (grossSalary < MIN_SALARY) {
             netSalary = grossSalary;
@@ -193,20 +205,17 @@ public class Employee {
             }
         }
         double bonus;
-        if (age < FIRST_AGE_FOR_BONUS) { // change to not be magic numbers instead constant - (n)
+        if (age < FIRST_AGE_FOR_BONUS) {
             bonus = BONUS_LOW;
             netSalary = netSalary + bonus;
-            System.out.print("Employee's net salary with bonus :" + netSalary);
         } else if (age == FIRST_AGE_FOR_BONUS && age < SECOND_AGE_FOR_BONUS) {
             bonus = BONUS_MEDIUM;
             netSalary = netSalary + bonus;
-            System.out.print("Employee's net salary with bonus :" + netSalary);
         } else if (age > SECOND_AGE_FOR_BONUS) {
             bonus = BONUS_HIGH;
             netSalary = netSalary + bonus;
-            System.out.print("Employee's net salary with bonus :" + netSalary);
         }
-
+        return netSalary / 12;
     }
     // getters
     public String getName() {
@@ -216,7 +225,7 @@ public class Employee {
 
     public double getSalary() {
 
-        return grossSalary;
+        return netSalary();
     }
 
     public int getBirthYear() {
@@ -229,7 +238,7 @@ public class Employee {
         return address;
     }
 
-    public UUID getEmployeeID() {
+    public int getEmployeeID() {
 
         return employeeID;
     }
@@ -239,14 +248,9 @@ public class Employee {
         return employees;
     }
 
-    private UUID genEmployeeUUID() {
-
-        return UUID.randomUUID();
-    }
-
     public String toString() {
-        return "\nNew Employee:\nID: " + this.employeeID + "\nName: " + this.name + "\nBirth year: " + this.birthYear
-                + "\nAddress: " + this.address + "\nMonthly gross salary: " + this.grossSalary + "\n";
+        return "\nEmployee:\nID: " + this.employeeID + "\nName: " + this.name + "\nBirth year: " + this.birthYear
+                + "\nAddress: " + this.address + "\nNet salary: " + netSalary() + "\n";
     }
 }
 
