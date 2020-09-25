@@ -84,13 +84,21 @@ public class Customer {
             if (customerList[i].customerId == cusIdToRemove) {
                 for (int j = i + 1; j < customerList.length; j++) {
                     customerList[i] = customerList[j];
-                    System.out.println(customerList[i].toString());
-                }}
-            //else{
-              //  System.out.println("Invalid customer Id");
-               //
-            // EmployeeMenu.employeeMenu();
+                    i++;
+                }
+                for (int k = 0; k < customerList.length; k++){
+                    int arrayCount = 0;
+                    if (customerList[k] != null){
+                        arrayCount++;
+                    }
+                    customerList[arrayCount] = null;
+                }
             }
+        }
+        System.out.println("Customer Removed");
+        for (int i = 0; i < customerList.length; i++)
+        System.out.println(customerList[i].toString());
+        EmployeeMenu.employeeMenu();
         }
     }
 
