@@ -1,54 +1,59 @@
 package DartSystem;
 
+import java.time.LocalDate;
 import java.util.Scanner;
+import java.util.UUID;
 
 public class Game {
 
-    private int id;
+    private String id;
     private String title;
     private String genre;
     private double rentCost;
     private boolean isRented;
+    private LocalDate rentedDate;
 
-    private static Game[] games = { new Game(1, "Sonic: The Hedgehog", "Explore", 23, false),
-            new Game(2, "Crash Bandicoot", "Racing", 24, false),
-            new Game(3, "The Legend of Zelda", "Explore", 51, true),
-            new Game(4, "Prince of Persia", "Impossible", 33, false),
-            new Game(5, "Super Mario", "Classic", 32, false),
-            new Game(6, "Street Fighter", "Fighting", 54, false),
-            new Game(7, "Tekken", "Fighting", 29, false)};
+    private static Game[] games = { new Game( "Sonic: The Hedgehog", "Explore", 23, false),
+            new Game( "Crash Bandicoot", "Racing", 24, false),
+            new Game( "The Legend of Zelda", "Explore", 51, true),
+            new Game( "Prince of Persia", "Impossible", 33, false),
+            new Game( "Super Mario", "Classic", 32, false),
+            new Game( "Street Fighter", "Fighting", 54, false),
+            new Game( "Tekken", "Fighting", 29, false)};
 
     private final Helper helper = new Helper();
 
     Game(){
     }
 
-    Game(int gameId, String gameTitle, String gameGenre, double gameRentCost) {
-        this.id = gameId;
+    Game(String gameTitle, String gameGenre, double gameRentCost) {
+        this.id = UUID.randomUUID().toString();
         this.genre = gameGenre;
         this.title = gameTitle;
         this.rentCost = gameRentCost;
         this.isRented = false;
+        this.rentedDate = null;
     }
 
 
-    Game(int gameId, String gameTitle, String gameGenre, double gameRentCost, boolean gameIsRented) {
-        this.id = gameId;
+    Game(String gameTitle, String gameGenre, double gameRentCost, boolean gameIsRented) {
+        this.id = UUID.randomUUID().toString();
         this.title = gameTitle;
         this.genre = gameGenre;
         this.rentCost = gameRentCost;
         this.isRented = gameIsRented;
+        this.rentedDate = null;
     }
 
     public static Game[] getGames(){
         return games;
     }
 
-    public int getId(){
+    public String getId(){
         return id;
     }
 
-    public void setId(int id){
+    public void setId(String id){
         this.id = id;
     }
 
@@ -57,7 +62,7 @@ public class Game {
     }
 
     public void setTitle(String title){
-         this.title = title;
+        this.title = title;
     }
 
     public String getGenre(){
@@ -85,19 +90,19 @@ public class Game {
     }
 
     public void increaseArray(){
-            Game[] gamesNew = new Game[games.length + (games.length/2)];
-            for (int i = 0; i < games.length; i++) {
-                gamesNew[i] = games[i];
-            }
-            games = gamesNew;
+        Game[] gamesNew = new Game[games.length + (games.length/2)];
+        for (int i = 0; i < games.length; i++) {
+            gamesNew[i] = games[i];
+        }
+        games = gamesNew;
     }
 
     public String toString(){
         String outOnRent;
         if (this.isRented){
-             outOnRent = "\033[31mOut on rent  \033[0m";
+            outOnRent = "\033[31mOut on rent  \033[0m";
         } else outOnRent = "Available";
-              String outputString = this.getId() + " : " + this.getTitle() + " (" + this.getGenre() + "). " + this.getRentCost()
+        String outputString = this.getId() + " : " + this.getTitle() + " (" + this.getGenre() + "). " + this.getRentCost()
                 + "kr. " + "Status: " + outOnRent + "\n";
         return outputString;
     }
@@ -112,12 +117,6 @@ public class Game {
             countArray = i + 1;
         }
 
-        int idCounter = games[countArray-1].id + 1;
-        System.out.println("* Suggested ID - " + idCounter + " *");
-        System.out.print("ID:  ");
-        int newGameID = helper.input.nextInt();
-        helper.input.nextLine();
-
         System.out.print("Title:  ");
         String newGameTitle = helper.input.nextLine();
 
@@ -128,7 +127,7 @@ public class Game {
         double newGameRentCost = helper.input.nextDouble();
         helper.input.nextLine();
 
-        games[countArray] = new Game(newGameID, newGameTitle, newGameGenre, newGameRentCost);
+        games[countArray] = new Game(newGameTitle, newGameGenre, newGameRentCost);
         System.out.println("Game Added Successfully : " + games[countArray].toString());
 
         System.out.println("1) Add another game" + "\n" + "2) View all games" + "\n" + "3) Employee Menu");
@@ -142,12 +141,12 @@ public class Game {
 
     public void removeGame() {
         System.out.println("Which game should be removed? ID:");
-        int gameId = helper.input.nextInt();
+        String gameId = helper.input.nextLine();
         helper.input.nextLine();
         boolean contains = false;
         for (int i = 0; i < games.length; i++) {
-            if (games[i].id == (gameId)) {
-               contains = true;
+            if (games[i].id.equals(gameId)) {
+                contains = true;
                 if (games[i].isRented == false) {
                     System.out.println("Are you sure you want to remove this game from the directory?" + "\n" + games[i].toString() + "\n" + "(Y/N)");
                     String doubleCheck = helper.input.nextLine();

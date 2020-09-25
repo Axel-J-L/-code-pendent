@@ -36,13 +36,13 @@ public class Rental {
                 }
         }
 
-        int rentId = getInput.getInt("Enter the ID of the game would you like to rent: ");
+        String rentId = getInput.getInput("Enter the ID of the game would you like to rent: ");
         int idMatch = -1;
         Boolean rentalStatus = false;
         Boolean isFound = false;
 
         for (int i = 0; i < rental.length;i++) {
-            if (rental[i].getId() == rentId) {
+            if (rental[i].getId().equals(rentId)) {
                 isFound = true;
                 idMatch = i;
                 rentalStatus = rental[i].getIsRented();
@@ -72,7 +72,7 @@ public class Rental {
         double userBill = 0;
 
         for (int i = 0; i < rental.length;i++) {
-            if (rental[i].getId() == rentId) {
+            if (rental[i].getId().equals(rentId)) {
                 isFound = true;
                 idMatch = i;
                 rentalStatus = rental[i].getIsRented();
