@@ -26,7 +26,7 @@ public class Employee {
     private final int FIRST_AGE_FOR_BONUS=22;
     private final int SECOND_AGE_FOR_BONUS=30;
 
-    Helper helper = new Helper();
+    Helper tools = new Helper();
 
     public Employee(){
 
@@ -72,23 +72,23 @@ public class Employee {
 
     public void addEmployee() {
         if (employees[employees.length - 1] != null) {
-            employees = helper.increaseEmployeeArr(employees);
+            employees = tools.increaseEmployeeArr(employees);
         }
         System.out.print("Creating an Employee. Please type the Employee’s:\n");
         System.out.print("Name: ");
-        String name = helper.input.nextLine();
+        String name = tools.input.nextLine();
 
         System.out.print("Birth year: ");
-        int birthYear = helper.input.nextInt();
-        helper.input.nextLine();
+        int birthYear = tools.input.nextInt();
+        tools.input.nextLine();
 
         System.out.print("Address: ");
-        String address = helper.input.nextLine();
+        String address = tools.input.nextLine();
 
         System.out.print("Monthly gross salary: ");
-        double monthlySalary = helper.input.nextDouble();
+        double monthlySalary = tools.input.nextDouble();
         grossSalary = monthlySalary * 12;
-        helper.input.nextLine();
+        tools.input.nextLine();
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null) {
                 continue; //starts the loop over until you get = null
@@ -134,8 +134,7 @@ public class Employee {
 
     public Employee[] removeEmployee() {
         viewEmployees();
-        System.out.print("Which employee should be removed? ID: ");
-        int enteredID = Helper.input.nextInt();
+        int enteredID = tools.getInt("Which employee should be removed? ID: ");
         for (int i = 0; i < employees.length; i++) { // goes through the array fed into method
             String deletedName = "";
             if (employees[i] == null) {
@@ -163,7 +162,7 @@ public class Employee {
                 j = employees.length; // only other situation would be position j && j+1 == null which means the array has two nulls in a row
             }
         }
-        employees = helper.trimArray(employees);
+        employees = tools.trimArray(employees);
         return employees;
     }
 
