@@ -44,7 +44,7 @@ private static Customer[] customerList={ new Customer(1,"Vernita", "hdkjn"),
             }
         }
 
-        int countId = customerList[countArray - 1].customerId;
+        int countId = customerList[countArray - 1].customerId + 1;
 
         if (customerList[customerList.length - 1] != null) {
             IncreaseArray();
@@ -52,8 +52,10 @@ private static Customer[] customerList={ new Customer(1,"Vernita", "hdkjn"),
 
         Scanner newCustomer = new Scanner(System.in);
         System.out.println("Add a customer here");
+        System.out.println("Suggested ID: " + countId);
         System.out.print("Enter the customers ID : ");
         int cusIdInputs = newCustomer.nextInt();
+        newCustomer.nextLine();
         System.out.print("Enter the customers first name: ");
         String cusFirstName = newCustomer.nextLine();
         System.out.print("Enter the customers last name: ");
