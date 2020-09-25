@@ -1,8 +1,6 @@
 package DartSystem;
 
 import java.util.Scanner;
-import java.util.UUID;
-import java.util.Date;
 
 public class Game {
 
@@ -11,14 +9,16 @@ public class Game {
     private String genre;
     private double rentCost;
     private boolean isRented;
-    private UUID rentedBy;
 
-    private static Game[] games = { new Game(1, "It is this", "Comedy", 12, false),
-            new Game(2, "Brainfreeze", "Comedy", 12, false),
-            new Game(3, "Give and take", "Comedy", 12, true),
-            new Game(4, "Pineapples", "Comedy", 12, false) };
+    private static Game[] games = { new Game(1, "Sonic: The Hedgehog", "Explore", 23, false),
+            new Game(2, "Crash Bandicoot", "Racing", 24, false),
+            new Game(3, "The Legend of Zelda", "Explore", 51, true),
+            new Game(4, "Prince of Persia", "Impossible", 33, false),
+            new Game(5, "Super Mario", "Classic", 32, false),
+            new Game(6, "Street Fighter", "Fighting", 54, false),
+            new Game(7, "Tekken", "Fighting", 29, false)};
 
-    private Helper helper = new Helper();
+    private final Helper helper = new Helper();
 
     Game(){
     }
@@ -29,7 +29,6 @@ public class Game {
         this.title = gameTitle;
         this.rentCost = gameRentCost;
         this.isRented = false;
-        this.rentedBy = null;
     }
 
 
@@ -39,7 +38,6 @@ public class Game {
         this.genre = gameGenre;
         this.rentCost = gameRentCost;
         this.isRented = gameIsRented;
-        this.rentedBy = null;
     }
 
     public static Game[] getGames(){
@@ -97,20 +95,25 @@ public class Game {
     public String toString(){
         String outOnRent;
         if (this.isRented){
-             outOnRent = "Out on rent";
+             outOnRent = "\033[31mOut on rent  \033[0m";
         } else outOnRent = "Available";
-              String outputString = this.id + " : " + this.getTitle() + " (" + this.getGenre() + "). " + this.getRentCost()
+              String outputString = this.getId() + " : " + this.getTitle() + " (" + this.getGenre() + "). " + this.getRentCost()
                 + "kr. " + "Status: " + outOnRent + "\n";
         return outputString;
     }
 
     public void addNewGame() {
-        int idCounter = games.length + 1;
         if (games[games.length - 1] != null) {
             increaseArray();
         }
 
-        System.out.println("* suggestion ID - " + idCounter + " *");
+        int countArray = 0;
+        for (int i = 0; games[i] != null; i++){
+            countArray = i + 1;
+        }
+
+        int idCounter = games[countArray-1].id + 1;
+        System.out.println("* Suggested ID - " + idCounter + " *");
         System.out.print("ID:  ");
         int newGameID = helper.input.nextInt();
         helper.input.nextLine();
@@ -125,11 +128,6 @@ public class Game {
         double newGameRentCost = helper.input.nextDouble();
         helper.input.nextLine();
 
-        int countArray = 0;
-        for (int i = 0; games[i] != null; i++){
-            countArray = i + 1;
-        }
-
         games[countArray] = new Game(newGameID, newGameTitle, newGameGenre, newGameRentCost);
         System.out.println("Game Added Successfully : " + games[countArray].toString());
 
@@ -143,16 +141,16 @@ public class Game {
     }
 
     public void removeGame() {
-        Scanner gameToRemove = new Scanner(System.in);
         System.out.println("Which game should be removed? ID:");
-        int gameId = gameToRemove.nextInt();
+        int gameId = helper.input.nextInt();
+        helper.input.nextLine();
         boolean contains = false;
         for (int i = 0; i < games.length; i++) {
             if (games[i].id == (gameId)) {
                contains = true;
                 if (games[i].isRented == false) {
                     System.out.println("Are you sure you want to remove this game from the directory?" + "\n" + games[i].toString() + "\n" + "(Y/N)");
-                    String doubleCheck = gameToRemove.nextLine();
+                    String doubleCheck = helper.input.nextLine();
                     if (doubleCheck.equalsIgnoreCase("y")) {
                         for (int j = i + 1; j < games.length + 1; j++) {
                             if (i == games.length - 1) {
@@ -167,7 +165,7 @@ public class Game {
                     } else removeGame();
                 } else {
                     System.out.println("Game has to be returned before it can be removed from the system.\n");
-                    EmployeeMenu.employeeMenu();
+                    viewAll();
                 }
             }
         } if (!contains) System.out.println("Couldn't find that game. Please make sure you enter the correct ID.\n");

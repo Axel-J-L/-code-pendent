@@ -19,7 +19,6 @@ public class Rental {
     public Rental() {
     }
 
-
     public double totalProfit;
 
 
@@ -32,10 +31,18 @@ public class Rental {
 
         System.out.println("Enter the ID of the game would you like to rent");
         int rentId = helper.input.nextInt();
+        boolean contains = false;
         for (int i = 0; i < rental.length ; i++){
-            if (rental[i].getId() == rentId){
+            if (rental[i].getId() == rentId && !rental[i].getIsRented()){
                 rental[i].setIsRented(true);
+                System.out.println("The game is yours for the playing!");
+                contains = true;
+            } else if (rental[i].getId() == rentId && rental[i].getIsRented()){
+                System.out.println("Sorry, that game is being enjoyed by someone else right now. Try a different one");
+                rentGame();
             }
+        } if(!contains) {
+            System.out.println("Game with id " + rentId + " not found.");
         }
         CustomerMenu.customerMenu();
     }

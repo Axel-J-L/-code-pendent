@@ -5,59 +5,29 @@ import java.util.UUID;
 
 public class Customer {
 
-private String customerId;
+private int customerId;
 private String firstName;
 private String lastName;
 
-private static Customer[] customerList={ new Customer("ver","Vernita", "hdkjn"),
-        new Customer("nav","Navya","pulikanla"),
-        new Customer("Dra","Drake","dr"),
-        new Customer("Alt","Altan","alt"),
-        new Customer("Ax","Axel","axe")};
+private static Customer[] customerList={ new Customer(1,"Vernita", "hdkjn"),
+        new Customer(2,"Navya","pulikanla"),
+        new Customer(3,"Drake","dr"),
+        new Customer(4,"Altan","alt"),
+        new Customer(5,"Axel","axe")};
 
     // Default Constructor
      Customer() {
     }
-   Customer(String customerId,String firstName,String lastName){
+
+    Customer(int customerId,String firstName,String lastName){
          this.customerId=customerId;
          this.firstName=firstName;
          this.lastName=lastName;
          }
 
-
-    public static void customerMenu() {
-        // TODO make not static
-        System.out.println("\nCustomer Screen - Type one of the options below:");
-        System.out.println("1. Rent a game");
-        System.out.println("2. Return a game");
-        System.out.println("3. Return to Main Menu");
-
-        String[] customerMenuAcceptSet = {"1", "2", "3"}; // Accepted responses for menu options
-        Helper input = new Helper(); // Creating new Helper object
-        String mInput = input.getMenuInput("Please enter your option: ", customerMenuAcceptSet); // Calling Helper method
-
-        switch(mInput.toLowerCase())
-        {
-            case "1":
-                System.out.println("Looking for a game?");
-                Rental toRent=new Rental();
-                toRent.rentGame();
-                break;
-            case "2":
-                System.out.println("You took it a year ago?!");
-                Rental toReturn=new Rental();
-                    toReturn.returnGame();
-                break;
-            case "3":
-                DartController.DartController();
-                break;
-            default:
-                System.out.println("no match");
-        }
-    }
     public String toString(){
          return
-      "ID :"+ this.customerId+" : "+ this.firstName+" "+this.lastName;
+      "ID :"+ this.customerId+ " : "+ this.firstName+" "+this.lastName;
     }
    public void IncreaseArray() {
        Customer[] customerListNew = new Customer[customerList.length + (customerList.length / 2)];
@@ -67,14 +37,25 @@ private static Customer[] customerList={ new Customer("ver","Vernita", "hdkjn"),
        customerList = customerListNew;
        }
     public void addCustomer() {
+        int countArray = 0;
+        for(int i = 0; i < customerList.length; i++){
+            if(customerList[i] != null){
+                countArray++;
+            }
+        }
+
+        int countId = customerList[countArray - 1].customerId + 1;
+
         if (customerList[customerList.length - 1] != null) {
             IncreaseArray();
         }
-        // TODO make not static
+
         Scanner newCustomer = new Scanner(System.in);
         System.out.println("Add a customer here");
+        System.out.println("Suggested ID: " + countId);
         System.out.print("Enter the customers ID : ");
-        String cusIdInputs = newCustomer.nextLine();
+        int cusIdInputs = newCustomer.nextInt();
+        newCustomer.nextLine();
         System.out.print("Enter the customers first name: ");
         String cusFirstName = newCustomer.nextLine();
         System.out.print("Enter the customers last name: ");
@@ -99,15 +80,13 @@ private static Customer[] customerList={ new Customer("ver","Vernita", "hdkjn"),
     }
 
 
-    public static void removeCustomer() {
-        // TODO make not static
+    public void removeCustomer() {
         Scanner remCustomer = new Scanner(System.in);
         System.out.println("Remove a customer here by entering their ID : ");
-        String cusIdToRemove = remCustomer.nextLine();
-
+        int cusIdToRemove = remCustomer.nextInt();
 
         for (int i = 0; i < customerList.length; i++) {
-            if (customerList[i].customerId.equalsIgnoreCase(cusIdToRemove)) {
+            if (customerList[i].customerId == cusIdToRemove) {
                 for (int j = i + 1; j < customerList.length; j++) {
                     customerList[i] = customerList[j];
                     System.out.println(customerList[i].toString());
@@ -115,9 +94,6 @@ private static Customer[] customerList={ new Customer("ver","Vernita", "hdkjn"),
                     System.out.println("Invalid customer Id");
                     //employeeMenu();
                 }
-
-
-
             }
         }
 
