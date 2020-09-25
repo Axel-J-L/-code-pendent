@@ -139,16 +139,16 @@ public class Employee {
         for (int i = 0; i < employees.length; i++) { // goes through the array fed into method
             String deletedName = "";
             if (employees[i] == null) {
-                System.out.println("No employees");
-                Manager menu = new Manager();
-                i = employees.length;
+                Manager.managerMenu();
             } else if (employees[i].getEmployeeID() != enteredID) { //  it doesnt equal our employee to remove do nothing.
                 System.out.println("invalid ID");
-            } else { // this is where we delete the employee
+            } else if (employees[i].getEmployeeID() == enteredID){ // this is where we delete the employee
                 deletedName = employees[i].getName();
                 employees[i] = null;
                 System.out.println("\nEmployee " + deletedName + " removed.");
                 i = employees.length;
+            } else {
+                Manager.managerMenu();
             }
         }
 
