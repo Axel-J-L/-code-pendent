@@ -54,20 +54,9 @@ public class Helper {
             }
 
         } while (accept);
-
         return this.userInput; // Returns user's menu choice back to called class
     }
 
-
-//    // asks for password and then returns value
-//    // (would like to implement authentication and hide password)
-//    public String Password() { //this is to implement passwords and password protection (D)
-//        Scanner scanner = new Scanner(System.in);  // Create a Scanner object
-//        System.out.print("Password: "); // hide password input
-//        String userPass = scanner.nextLine();
-//        scanner.close(); // Close scanner
-//        return userPass;  // Output user input
-//    }
 
     public boolean authenticate(String password) { // authenticates passwords
         String enteredPassword = getInput("Enter your password: ");
