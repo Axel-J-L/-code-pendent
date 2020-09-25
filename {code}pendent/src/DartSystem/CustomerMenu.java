@@ -2,6 +2,8 @@ package DartSystem;
 
 public class CustomerMenu {
 
+    private static Helper getInput = new Helper(); // Creating new Helper object
+
     public static void customerMenu() {
         System.out.println("\nCustomer Screen - Type one of the options below:");
         System.out.println("1. Rent a game");
@@ -9,17 +11,16 @@ public class CustomerMenu {
         System.out.println("3. Return to Main Menu");
 
         String[] customerMenuAcceptSet = {"1", "2", "3"}; // Accepted responses for menu options
-        Helper input = new Helper(); // Creating new Helper object
-        String mInput = input.getMenuInput("Please enter your option: ", customerMenuAcceptSet); // Calling Helper method
+        String mInput = getInput.getMenuInput("Please enter your option: ", customerMenuAcceptSet); // Calling Helper method
 
         switch(mInput.toLowerCase())
         {
             case "1":
-                Rental toRent=new Rental();
+                Rental toRent = new Rental();
                 toRent.rentGame();
                 break;
             case "2":
-                Rental toReturn=new Rental();
+                Rental toReturn = new Rental();
                 toReturn.returnGame();
                 break;
             case "3":

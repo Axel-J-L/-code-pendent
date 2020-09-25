@@ -40,11 +40,10 @@ public class Helper {
 
         Boolean accept = true;
 
-        // di while to loop around until user enter one of the AcceptSet characters. Anything else, just keeps looping
+        // do while to loop around until user enter one of the AcceptSet characters. Anything else, just keeps looping
         do {
             System.out.print("\n" + message); // String message from called class before asking for input
             userInput = input.nextLine(); // Gets user input
-
 
             for (int i = 0; i < acceptSet.length; i++) { // Loop around AcceptSet array for matching letter
                 if (userInput.equals(acceptSet[i])) { // If user input is correct, then break loop and close scanner
@@ -53,7 +52,7 @@ public class Helper {
 
             }
 
-        } while (accept);
+        } while(accept);
 
         return this.userInput; // Returns user's menu choice back to called class
     }

@@ -25,7 +25,7 @@ private static Customer[] customerList={ new Customer("ver","Vernita", "hdkjn"),
          }
 
 
-    public static void customerMenu() {
+    /*public static void customerMenu() {
         // TODO make not static
         System.out.println("\nCustomer Screen - Type one of the options below:");
         System.out.println("1. Rent a game");
@@ -54,7 +54,8 @@ private static Customer[] customerList={ new Customer("ver","Vernita", "hdkjn"),
             default:
                 System.out.println("no match");
         }
-    }
+    }*/
+
     public String toString(){
          return
       "ID :"+ this.customerId+" : "+ this.firstName+" "+this.lastName;
