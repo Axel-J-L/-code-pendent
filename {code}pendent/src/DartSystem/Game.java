@@ -10,13 +10,13 @@ public class Game {
     private double rentCost;
     private boolean isRented;
 
-    private static Game[] games = { new Game(1, "Sonic: The Hedgehog", "Explore", 12, false),
-            new Game(2, "Crash Bandicoot", "Racing", 12, false),
-            new Game(3, "The Legend of Zelda", "Explore", 12, true),
-            new Game(4, "Prince of Persia", "Impossible", 12, false),
-            new Game(5, "Super Mario", "Classic", 12, false),
-            new Game(6, "Street Fighter", "Fighting", 12, false),
-            new Game(7, "Tekken", "Fighting", 12, false)};
+    private static Game[] games = { new Game(1, "Sonic: The Hedgehog", "Explore", 23, false),
+            new Game(2, "Crash Bandicoot", "Racing", 24, false),
+            new Game(3, "The Legend of Zelda", "Explore", 51, true),
+            new Game(4, "Prince of Persia", "Impossible", 33, false),
+            new Game(5, "Super Mario", "Classic", 32, false),
+            new Game(6, "Street Fighter", "Fighting", 54, false),
+            new Game(7, "Tekken", "Fighting", 29, false)};
 
     private final Helper helper = new Helper();
 
@@ -95,7 +95,7 @@ public class Game {
     public String toString(){
         String outOnRent;
         if (this.isRented){
-             outOnRent = "Out on rent";
+             outOnRent = "\033[31mOut on rent  \033[0m";
         } else outOnRent = "Available";
               String outputString = this.getId() + " : " + this.getTitle() + " (" + this.getGenre() + "). " + this.getRentCost()
                 + "kr. " + "Status: " + outOnRent + "\n";
@@ -107,7 +107,12 @@ public class Game {
             increaseArray();
         }
 
-        int idCounter = games.length + 1;
+        int countArray = 0;
+        for (int i = 0; games[i] != null; i++){
+            countArray = i + 1;
+        }
+
+        int idCounter = games[countArray-1].id + 1;
         System.out.println("* Suggested ID - " + idCounter + " *");
         System.out.print("ID:  ");
         int newGameID = helper.input.nextInt();
@@ -122,11 +127,6 @@ public class Game {
         System.out.print("Daily Rent Fee:  ");
         double newGameRentCost = helper.input.nextDouble();
         helper.input.nextLine();
-
-        int countArray = 0;
-        for (int i = 0; games[i] != null; i++){
-            countArray = i + 1;
-        }
 
         games[countArray] = new Game(newGameID, newGameTitle, newGameGenre, newGameRentCost);
         System.out.println("Game Added Successfully : " + games[countArray].toString());
