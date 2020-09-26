@@ -2,8 +2,10 @@ package DartSystem;
 import java.time.Year;
 import java.util.UUID;
 
+
 public class Employee {
-    private int employeeID;
+
+    private String employeeID;
     private String name;
     private int birthYear;
     private String address;
@@ -56,17 +58,19 @@ public class Employee {
 //            }
 //            return employeeArr;
 //        }
-    private int genEmployeeID() {
-        int newID = 1;
-        for (int i = 0; i < employees.length; i++){
-            if (employees[i] == null){
-                continue;
-            }
-            if (employees[i] != null){
-                newID = employees[i].getEmployeeID() + 1;
-            }
-        }
-        return newID;
+    private String genEmployeeID() {
+        String generatedID = UUID.randomUUID().toString();
+        return generatedID;
+//        int newID = 1;
+//        for (int i = 0; i < employees.length; i++){
+//            if (employees[i] == null){
+//                continue;
+//            }
+//            if (employees[i] != null){
+//                newID = employees[i].getEmployeeID() + 1;
+//            }
+//        }
+//        return newID;
     }
 
 
@@ -134,36 +138,51 @@ public class Employee {
 
     public Employee[] removeEmployee() {
         viewEmployees();
-        int enteredID = tools.getInt("Which employee should be removed? ID: ");
-        for (int i = 0; i < employees.length; i++) { // goes through the array fed into method
-            String deletedName = "";
-            if (employees[i] == null) {
-                Manager.managerMenu();
-            } else if (employees[i].getEmployeeID() != enteredID) { //  it doesnt equal our employee to remove do nothing.
-                System.out.println("invalid ID");
-            } else if (employees[i].getEmployeeID() == enteredID){ // this is where we delete the employee
-                deletedName = employees[i].getName();
-                employees[i] = null;
-                System.out.println("\nEmployee " + deletedName + " removed.");
-                i = employees.length;
-            } else {
-                Manager.managerMenu();
+        String enteredID = tools.getInput("Which employee should be removed? ID: ");
+        for (int i = 0; i< employees.length-1; i++) { // iterates through the array of employees
+            if (enteredID.equals(employees[i].employeeID)) { // once it finds the employee with the id it enters are next loop
+                for (int j = i; j < employees.length-1; j++) { // once inside this loop it starts replacing the current index with the next one
+                    employees[i] = employees[j+1]; //shifting
+                    i++;
+                }
+                employees[employees.length-1] = null; // deletes the last position after the shift to get rid of duplicate
+                i = employees.length; // YEAH I KNOW THIS IS TECHNICALLY A BREAK FIGHT ME!
             }
         }
-
-        // this actually deletes the employee
-        for (int j = 0; j < employees.length - 1; j++) { //runs through the array
-            if (employees[j] != (null) && employees[j + 1] != null) { // position j != null && position j+1 != null
-                continue; //do nothing
-            } else if (employees[j] == (null) && employees[j + 1] != null) { // position j = null && position j+1 !=null
-                employees[j] = employees[j + 1]; // position j = position j + 1\
-                employees[j + 1] = null;
-            } else {
-                j = employees.length; // only other situation would be position j && j+1 == null which means the array has two nulls in a row
-            }
-        }
-        employees = tools.trimArray(employees);
         return employees;
+
+
+
+//        int enteredID = tools.getInt("Which employee should be removed? ID: ");
+//        for (int i = 0; i < employees.length; i++) { // goes through the array fed into method
+//            String deletedName = "";
+//            if (employees[i] == null) {
+//                Manager.managerMenu();
+//            } else if (employees[i].getEmployeeID().equals(enteredID)) { //  it doesnt equal our employee to remove do nothing.
+//                System.out.println("invalid ID");
+//            } else if (employees[i].getEmployeeID().equals(enteredID)){ // this is where we delete the employee
+//                deletedName = employees[i].getName();
+//                employees[i] = null;
+//                System.out.println("\nEmployee " + deletedName + " removed.");
+//                i = employees.length;
+//            } else {
+//                Manager.managerMenu();
+//            }
+//        }
+//
+//        // this actually deletes the employee
+//        for (int j = 0; j < employees.length - 1; j++) { //runs through the array
+//            if (employees[j] != (null) && employees[j + 1] != null) { // position j != null && position j+1 != null
+//                continue; //do nothing
+//            } else if (employees[j] == (null) && employees[j + 1] != null) { // position j = null && position j+1 !=null
+//                employees[j] = employees[j + 1]; // position j = position j + 1\
+//                employees[j + 1] = null;
+//            } else {
+//                j = employees.length; // only other situation would be position j && j+1 == null which means the array has two nulls in a row
+//            }
+//        }
+//        employees = tools.trimArray(employees);
+//        return employees;
     }
 
     public static void authEmployee() {
@@ -237,7 +256,7 @@ public class Employee {
         return address;
     }
 
-    public int getEmployeeID() {
+    public String getEmployeeID() {
 
         return employeeID;
     }
