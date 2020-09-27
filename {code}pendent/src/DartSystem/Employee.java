@@ -79,18 +79,10 @@ public class Employee {
             employees = tools.increaseEmployeeArr(employees);
         }
         System.out.print("Creating an Employee. Please type the Employee’s:\n");
-        System.out.print("Name: ");
-        String name = tools.input.nextLine();
-
-        System.out.print("Birth year: ");
-        int birthYear = tools.input.nextInt();
-        tools.input.nextLine();
-
-        System.out.print("Address: ");
-        String address = tools.input.nextLine();
-
-        System.out.print("Monthly gross salary: ");
-        double monthlySalary = tools.input.nextDouble();
+        String name = tools.getInput("Name: ");
+        int birthYear = tools.getInt("birth year: ");
+        String address = tools.getInput("Address: ");
+        double monthlySalary = tools.getDouble("Monthly gross salary: ");
         grossSalary = monthlySalary * 12;
         tools.input.nextLine();
         for (int i = 0; i < employees.length; i++) {

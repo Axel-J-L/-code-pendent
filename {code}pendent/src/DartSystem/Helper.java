@@ -35,6 +35,15 @@ public class Helper {
         return userInput;  // Output user input
 
     }
+    public double getDouble(String message) { // Method to get string input from user and return
+
+        System.out.print(message); //removed println and replaced with print (D) if we need and println version we'll make one
+        double userInput = input.nextInt();  // Read user input
+        input.nextLine();
+        // scanner.close(); // Close scanner - This causes issue, leave it commented out (Altan)
+        return userInput;  // Output user input
+
+    }
 
     public String getMenuInput(String message, String[] acceptSet) { // Method to get menu input from user and return
 
