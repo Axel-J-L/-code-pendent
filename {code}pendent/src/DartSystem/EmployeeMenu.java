@@ -35,7 +35,6 @@ public class EmployeeMenu {
                 menuWorker.addCustomer();
                 break;
             case "4":
-                System.out.println("Remove customer: ");
                 Customer menuWorker2 = new Customer();
                 menuWorker2.removeCustomer();
                 break;

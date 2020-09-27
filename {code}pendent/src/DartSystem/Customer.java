@@ -24,7 +24,7 @@ public class Customer {
 
     public String toString(){
         return
-                "ID :"+ this.customerId+ " : "+this.name;
+                "ID: "+ this.customerId+ ", Name: "+this.name;
     }
     public void IncreaseArray() {
         Customer[] customerListNew = new Customer[customerList.length + (customerList.length / 2)];
@@ -73,6 +73,7 @@ public class Customer {
 
 
     public void removeCustomer() {
+        viewEmployee();
         System.out.println("Remove a customer here by entering their ID : ");
         int cusIdToRemove = helper.input.nextInt();
 
@@ -92,13 +93,17 @@ public class Customer {
             }
         }
         System.out.println("Customer Removed");
+        EmployeeMenu.employeeMenu();
+    }
+
+    public void viewEmployee(){
         for (int i = 0; i < customerList.length; i++) {
             if (customerList[i]!=null){
                 System.out.println(customerList[i].toString());
             }
         }
-        EmployeeMenu.employeeMenu();
     }
+
 }
 
 

@@ -83,7 +83,7 @@ public class Employee {
         String address = tools.getInput("Address: ");
         double monthlySalary = tools.getDouble("Monthly gross salary: ");
         grossSalary = monthlySalary * 12;
-        tools.input.nextLine();
+        // tools.input.nextLine();
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null) {
                 continue; //starts the loop over until you get = null
