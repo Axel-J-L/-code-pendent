@@ -26,8 +26,9 @@ public class DartController {
                 Manager.authManager();
                 break;
             case "e":
-                EmployeeMenu employeeMenu = new EmployeeMenu();
-                employeeMenu.employeeMenu();
+                Employee.authEmployee();
+//                EmployeeMenu employeeMenu = new EmployeeMenu();
+//                employeeMenu.employeeMenu();
                 break;
             case "c":
                 CustomerMenu.customerMenu();
