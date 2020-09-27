@@ -22,6 +22,7 @@ public class Manager {
         {
             case "1":
                 Employee addEmployee = new Employee();
+                System.out.print("Creating an Employee. Please type the Employee’s:\n");
                 addEmployee.addEmployee();
                 managerMenu();
                 break;

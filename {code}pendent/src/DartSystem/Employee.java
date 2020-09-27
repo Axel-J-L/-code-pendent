@@ -78,7 +78,6 @@ public class Employee {
         if (employees[employees.length - 1] != null) {
             employees = tools.increaseEmployeeArr(employees);
         }
-        System.out.print("Creating an Employee. Please type the Employee’s:\n");
         String name = tools.getInput("Name: ");
         int birthYear = tools.getInt("birth year: ");
         String address = tools.getInput("Address: ");
