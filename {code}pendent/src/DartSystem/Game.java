@@ -151,7 +151,6 @@ public class Game {
     public void removeGame() {
         System.out.println("Which game should be removed? ID:");
         String gameId = helper.input.nextLine();
-        helper.input.nextLine();
         boolean contains = false;
         for (int i = 0; i < games.length; i++) {
             if (games[i].id.equals(gameId)) {
@@ -177,6 +176,7 @@ public class Game {
                 }
             }
         } if (!contains) System.out.println("Couldn't find that game. Please make sure you enter the correct ID.\n");
+        EmployeeMenu.employeeMenu();
     }
 
     public void viewAll(){

@@ -74,8 +74,7 @@ public class Customer {
 
     public void removeCustomer() {
         viewEmployee();
-        System.out.println("Remove a customer here by entering their ID : ");
-        int cusIdToRemove = helper.input.nextInt();
+        int cusIdToRemove = helper.getInt("Remove a customer here by entering their ID : ");
 
         for (int i = 0; i < customerList.length; i++) {
             if (customerList[i].customerId == cusIdToRemove) {
