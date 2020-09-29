@@ -14,11 +14,7 @@ public class Employee {
     private String address;
     private double grossSalary;
     private static Employee[] employees =  new Employee[4];
-    private ArrayList<Album> albums = new ArrayList<Album>();
 
-    public ArrayList<Album> getAlbums() {
-        return albums;
-    }
     //    // test box
 //    private static Employee[] employees = {
 //            new Employee("bob", 1948, "a place", 19456),

@@ -1,5 +1,6 @@
 package DartSystem.Music;
 
+import DartSystem.DartController;
 import DartSystem.Employee;
 import DartSystem.EmployeeMenu;
 import DartSystem.Helper;
@@ -22,6 +23,7 @@ public class Album {
 
 
     Helper helper = new Helper();
+    DartController dartController = new DartController();
 
     public Album(){
     };
@@ -74,7 +76,7 @@ public class Album {
         }else return "available";
     }
 
-    public void addAlbum(){
+    public void addAlbum(Album album){
         viewAlbums();
         String addId = helper.getInput("ID: ");
         String addTitle = helper.getInput("Title: ");
@@ -82,17 +84,17 @@ public class Album {
         int addYear = helper.getInt("Year: ");
         double addDailyRent = helper.getDouble("Daily Rent amount: ");
         Album generateAlbum = new Album(addId, addTitle, addArtist, addYear, addDailyRent);
-        bob.getAlbums().add(generateAlbum);
+        dartController.getAlbums().add(generateAlbum);
         viewAlbums();
-        addAlbum();
+        EmployeeMenu.employeeMenu();
     }
 
     public void removeAlbum(){
         viewAlbums();
         String removeAlbum = helper.getInput("Enter id of album to remove: ");
-        for(int i =0; i < bob.getAlbums().size(); i++){
-            if(bob.getAlbums().get(i).getID().equalsIgnoreCase(removeAlbum)){
-                bob.getAlbums().remove(i);
+        for(int i = 0; i < dartController.getAlbums().size(); i++){
+            if(dartController.getAlbums().get(i).getID().equalsIgnoreCase(removeAlbum)){
+                dartController.getAlbums().remove(i);
             }else{
                 System.out.println("This album doesn't exist. Please check the id again.");
             }
@@ -108,8 +110,8 @@ public class Album {
 
     }
     public void viewAlbums(){
-        for(int i = 0; i < bob.getAlbums().size(); i++){
-            System.out.println(bob.getAlbums().toString());
+        for(int i = 0; i < dartController.getAlbums().size(); i++){
+            System.out.println(dartController.getAlbums().toString());
         }
     }
 }

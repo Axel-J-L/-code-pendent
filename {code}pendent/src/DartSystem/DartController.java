@@ -1,9 +1,16 @@
 package DartSystem;
 
+import DartSystem.Music.Album;
+
 import java.lang.*;
+import java.util.ArrayList;
 
 public class DartController {
+    private ArrayList<Album> albums = new ArrayList<Album>();
 
+    public ArrayList<Album> getAlbums() {
+        return albums;
+    }
 
     // Default Constructor
     public static void DartController() {
