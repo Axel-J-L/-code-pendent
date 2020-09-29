@@ -1,11 +1,13 @@
 package DartSystem.Music;
 
+import DartSystem.Employee;
 import DartSystem.EmployeeMenu;
 import DartSystem.Helper;
 
 import java.util.ArrayList;
 
 public class Album {
+    Employee bob = new Employee();
     private String songID;
     private String title;
     private String artist;
@@ -14,7 +16,10 @@ public class Album {
     private boolean rentStatus;
     private int rating;
     private ArrayList<Songs> trackList = new ArrayList<>();
-    private ArrayList<Album> albums = new ArrayList<Album>();
+    //private ArrayList<Album> albums = new ArrayList<Album>();
+
+    // public Album testAlbum = new Album("something","something else ","something else else",45,45);
+
 
     Helper helper = new Helper();
 
@@ -76,19 +81,18 @@ public class Album {
         String addArtist = helper.getInput("Artist: ");
         int addYear = helper.getInt("Year: ");
         double addDailyRent = helper.getDouble("Daily Rent amount: ");
-        Album newAlbum=new Album(addId, addTitle, addArtist, addYear, addDailyRent);
-        albums.add(newAlbum);
-        albums.add(newAlbum);
+        Album generateAlbum = new Album(addId, addTitle, addArtist, addYear, addDailyRent);
+        bob.getAlbums().add(generateAlbum);
         viewAlbums();
-        EmployeeMenu.employeeMenu();
+        addAlbum();
     }
 
     public void removeAlbum(){
         viewAlbums();
         String removeAlbum = helper.getInput("Enter id of album to remove: ");
-        for(int i =0; i < albums.size(); i++){
-            if(albums.get(i).getID().equalsIgnoreCase(removeAlbum)){
-                albums.remove(i);
+        for(int i =0; i < bob.getAlbums().size(); i++){
+            if(bob.getAlbums().get(i).getID().equalsIgnoreCase(removeAlbum)){
+                bob.getAlbums().remove(i);
             }else{
                 System.out.println("This album doesn't exist. Please check the id again.");
             }
@@ -104,8 +108,8 @@ public class Album {
 
     }
     public void viewAlbums(){
-        for(int i = 0; i < albums.size(); i++){
-            System.out.println(albums.toString());
+        for(int i = 0; i < bob.getAlbums().size(); i++){
+            System.out.println(bob.getAlbums().toString());
         }
     }
 }

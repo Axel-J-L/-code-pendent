@@ -1,5 +1,8 @@
 package DartSystem;
+import DartSystem.Music.Album;
+
 import java.time.Year;
+import java.util.ArrayList;
 import java.util.UUID;
 
 
@@ -11,9 +14,12 @@ public class Employee {
     private String address;
     private double grossSalary;
     private static Employee[] employees =  new Employee[4];
+    private ArrayList<Album> albums = new ArrayList<Album>();
 
-
-//    // test box
+    public ArrayList<Album> getAlbums() {
+        return albums;
+    }
+    //    // test box
 //    private static Employee[] employees = {
 //            new Employee("bob", 1948, "a place", 19456),
 //            new Employee("todd", 1977, "some place", 13973),
@@ -176,7 +182,7 @@ public class Employee {
 //        return employees;
     }
 
-  /* public static void authEmployee() {
+   public static void authEmployee() {
         String password = "password123";
         Helper Authorize = new Helper();
         Boolean authSuccess = Authorize.authenticate(password);
@@ -189,7 +195,7 @@ public class Employee {
             DartController mainMenu = new DartController();
             mainMenu.DartController();
         }
-    }*/
+    }
 
 
     public void viewEmployees() {
