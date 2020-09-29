@@ -6,7 +6,7 @@ public class Songs {
     private String artist;
     private double length;
     private String genre;
-
+    private Songs [ ] songs;
     //constructor
     public Songs(String title, String artist){
         this.title = title;
@@ -16,6 +16,7 @@ public class Songs {
     //getters
     public String getTitle(){ return title; }
     public String getArtist(){ return artist; }
+    public Songs [] getSong() { return songs; }
 
 
 
