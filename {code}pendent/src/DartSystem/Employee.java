@@ -176,7 +176,7 @@ public class Employee {
 //        return employees;
     }
 
-  /*  public static void authEmployee() {
+  /* public static void authEmployee() {
         String password = "password123";
         Helper Authorize = new Helper();
         Boolean authSuccess = Authorize.authenticate(password);
