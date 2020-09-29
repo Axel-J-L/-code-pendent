@@ -14,7 +14,7 @@ public class Album {
     private boolean rentStatus;
     private int rating;
     private ArrayList<Songs> trackList = new ArrayList<>();
-    private ArrayList<Album> albums = new ArrayList<>();
+    private ArrayList<Album> albums = new ArrayList<Album>();
 
     Helper helper = new Helper();
 
@@ -70,12 +70,14 @@ public class Album {
     }
 
     public void addAlbum(){
+        viewAlbums();
         String addId = helper.getInput("ID: ");
         String addTitle = helper.getInput("Title: ");
         String addArtist = helper.getInput("Artist: ");
         int addYear = helper.getInt("Year: ");
         double addDailyRent = helper.getDouble("Daily Rent amount: ");
         Album newAlbum=new Album(addId, addTitle, addArtist, addYear, addDailyRent);
+        albums.add(newAlbum);
         albums.add(newAlbum);
         viewAlbums();
         EmployeeMenu.employeeMenu();
@@ -103,7 +105,7 @@ public class Album {
     }
     public void viewAlbums(){
         for(int i = 0; i < albums.size(); i++){
-            System.out.println(albums.get(i).toString());
+            System.out.println(albums.toString());
         }
     }
 }
