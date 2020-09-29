@@ -78,7 +78,18 @@ public class Album {
         albums.add(newAlbum);
     }
 
-    public removeAlbum(){
+    public void removeAlbum(){
+        viewAlbums();
+        String removeAlbum = helper.getInput("Enter id of album to remove: ");
+        for(int i =0; i < albums.size(); i++){
+            if(albums.get(i).getID().equalsIgnoreCase(removeAlbum)){
+                albums.remove(i);
+            }else{
+                System.out.println("This album doesn't exist. Please check the id again.");
+            }
+        }
+
+
 
     }
     public rentAlbum(){
@@ -86,5 +97,10 @@ public class Album {
     }
     public returnAlbum(){
 
+    }
+    public void viewAlbums(){
+        for(int i = 0; i < albums.size(); i++){
+            System.out.println(albums.get(i).toString());
+        }
     }
 }
