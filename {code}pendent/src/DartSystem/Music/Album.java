@@ -1,14 +1,17 @@
 package DartSystem.Music;
 
+import java.util.ArrayList;
+
 public class Album {
     private String songID;
     private String title;
     private String artist;
+    private int year;
     private boolean rentStatus;
     private int rating;
-    private Songs [ ] trackList;
-    public Album( ){
-
+    private double dailyRent;
+    private Songs  trackList ;
+    public Album(){
     };
 
     public Album(String songId, String title, String artist, Songs getSong[ ]){
@@ -35,12 +38,17 @@ public class Album {
         return artist;
     }
 
-    public String getYear( ){
+    public int getYear( ){
+        return year;
     }
 
-    public String getDailyRent( ){
+    public double getDailyRent( ){
+        return dailyRent;
     }
 
     public String getRentStatus( ){
+        if(this.rentStatus){
+            return "Not available";
+        }else return "available";
     }
 }
