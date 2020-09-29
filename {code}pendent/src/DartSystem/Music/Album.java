@@ -10,31 +10,33 @@ public class Album {
     private boolean rentStatus;
     private int rating;
     private double dailyRent;
-    private Songs  trackList ;
+    private  ArrayList<Songs> trackList = new ArrayList<>();
+    private ArrayList<Album> albums;
+
     public Album(){
     };
 
-    public Album(String songId, String title, String artist, Songs getSong[ ]){
+    public Album(String songId, String title, String artist, ArrayList<Songs> trackList){
         this.songID = songId;
         this.title = title;
         this.artist = artist;
         this.rentStatus = false;
-        this.trackList = getSong;
+        this.trackList = trackList;
 
     }
- public String toString( ) {
+ public String toString( ){
         return this.getID + " : " + this.getTitle + " - by " + this.getArtist + ". " + "Released in " + this.getYear + ". " + " Price:" + this.getDailyRent + " SEK. Status: " + this.getRentStatus;
  }
 
- public String getID( )   {
+ public String getID( ){
         return songID;
  }
 
-    public String getTitle( )      {
+    public String getTitle( ){
         return title;
     }
 
-    public String getArtist( )           {
+    public String getArtist( ){
         return artist;
     }
 

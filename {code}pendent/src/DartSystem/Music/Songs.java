@@ -1,12 +1,14 @@
 package DartSystem.Music;
 
+import java.util.ArrayList;
+
 public class Songs {
 
     private String title;
     private String artist;
     private double length;
     private String genre;
-    private Songs [ ] songs;
+    private ArrayList<Songs> songs;
     //constructor
     public Songs(String title, String artist){
         this.title = title;
@@ -14,10 +16,9 @@ public class Songs {
 
     }
     //getters
-    public String getTitle(){ return title; }
-    public String getArtist(){ return artist; }
-    public Songs [] getSong() { return songs; }
-
+    public String getTitle(){ return title;}
+    public String getArtist(){ return artist;}
+    public ArrayList<Songs> getSong() { return songs;}
 
 
 
