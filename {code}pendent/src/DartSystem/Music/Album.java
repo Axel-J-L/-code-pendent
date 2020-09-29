@@ -1,5 +1,6 @@
 package DartSystem.Music;
 
+import DartSystem.EmployeeMenu;
 import DartSystem.Helper;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public class Album {
     private boolean rentStatus;
     private int rating;
     private ArrayList<Songs> trackList = new ArrayList<>();
-    private ArrayList<Album> albums;
+    private ArrayList<Album> albums = new ArrayList<>();
 
     Helper helper = new Helper();
 
@@ -39,30 +40,30 @@ public class Album {
 
     }
  public String toString( ){
-        return this.getID + " : " + this.getTitle + " - by " + this.getArtist + ". " + "Released in " + this.getYear + ". " + " Price:" + this.getDailyRent + " SEK. Status: " + this.getRentStatus;
+        return this.getID() + " : " + this.getTitle() + " - by " + this.getArtist() + ". " + "Released in " + this.getYear() + ". " + " Price:" + this.getDailyRent() + " SEK. Status: " + this.getRentStatus();
  }
 
- public String getID( ){
+ public String getID(){
         return songID;
  }
 
-    public String getTitle( ){
+    public String getTitle(){
         return title;
     }
 
-    public String getArtist( ){
+    public String getArtist(){
         return artist;
     }
 
-    public int getYear( ){
+    public int getYear(){
         return year;
     }
 
-    public double getDailyRent( ){
+    public double getDailyRent(){
         return dailyRent;
     }
 
-    public String getRentStatus( ){
+    public String getRentStatus(){
         if(this.rentStatus){
             return "Not available";
         }else return "available";
@@ -76,6 +77,8 @@ public class Album {
         double addDailyRent = helper.getDouble("Daily Rent amount: ");
         Album newAlbum=new Album(addId, addTitle, addArtist, addYear, addDailyRent);
         albums.add(newAlbum);
+        viewAlbums();
+        EmployeeMenu.employeeMenu();
     }
 
     public void removeAlbum(){
@@ -88,14 +91,14 @@ public class Album {
                 System.out.println("This album doesn't exist. Please check the id again.");
             }
         }
+        viewAlbums();
+        EmployeeMenu.employeeMenu();
+    }
 
-
+    public void rentAlbum(){
 
     }
-    public rentAlbum(){
-
-    }
-    public returnAlbum(){
+    public void returnAlbum(){
 
     }
     public void viewAlbums(){

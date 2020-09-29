@@ -1,5 +1,7 @@
 package DartSystem;
 
+import DartSystem.Music.Album;
+
 public class EmployeeMenu {
     public static void employeeMenu() {
         // TODO make not static
@@ -8,11 +10,13 @@ public class EmployeeMenu {
         System.out.println("Employee screen - Type one of the options below:");
         System.out.println("1. Register a game ");
         System.out.println("2. Remove a game");
-        System.out.println("3. Register a customer");
-        System.out.println("4. Remove a customer");
-        System.out.println("5. Show total rent profit");
-        System.out.println("6. View all games");
-        System.out.println("7. Return to main menu");
+        System.out.println("3. Register an album");
+        System.out.println("4. Remove an album");
+        System.out.println("5. Register a customer");
+        System.out.println("6. Remove a customer");
+        System.out.println("7. Show total rent profit");
+        System.out.println("8. View all games");
+        System.out.println("9. Return to main menu");
 
         String[] employeeMenuAcceptSet = {"1","2","3","4","5","6","7"}; // Accepted responses for menu options /A
         Helper getInput = new Helper(); // Getting new object from Helper /A
@@ -29,26 +33,36 @@ public class EmployeeMenu {
                 Game removeProcess = new Game();
                 removeProcess.removeGame();
                 break;
-            case "3":
+                case "3":
+                System.out.println("Register album ");
+                Album addAlbum = new Album();
+                addAlbum.addAlbum();
+                break;
+                case "4":
+                System.out.println("Remove album");
+                Album removeAlbum = new Album();
+                removeAlbum.removeAlbum();
+                break;
+            case "5":
                 System.out.println("Register a customer");
                 Customer menuWorker = new Customer();
                 menuWorker.addCustomer();
                 break;
-            case "4":
+            case "6":
                 Customer menuWorker2 = new Customer();
                 menuWorker2.removeCustomer();
                 break;
-            case "5":
+            case "7":
                 Rental getIncome = new Rental();
                 getIncome.showRentalIncome();
                 break;
-            case "6":
+            case "8":
                 System.out.println("View all games: ");
                 Game viewProcess = new Game();
                 viewProcess.viewAll();
 
                 break;
-            case "7":
+            case "9":
                 System.out.println("Return to main menu: ");
                 DartController.DartController();
 
