@@ -6,10 +6,29 @@ import java.lang.*;
 import java.util.ArrayList;
 
 public class DartController {
+
+    //opening child classes
+    Employee employee = new Employee();
+    Customer customer = new Customer();
+    Helper helper = new Helper();
+    EmployeeMenu employeeMenu = new EmployeeMenu();
+    Album album = new Album();
+
     private ArrayList<Album> albums = new ArrayList<Album>();
 
-    public ArrayList<Album> getAlbums() {
-        return albums;
+        public void viewAlbums() {
+//        for(int i = 0; i < dartController.getAlbums().size(); i++){
+//            System.out.println(dartController.getAlbums().toString());
+            for (Album album : albums) {
+                System.out.println(album.toString());
+            }
+        }
+
+
+
+    public void addAlbum(){
+        this.albums.add(album.userCreateAlbum());
+        employeeMenu.employeeMenu();
     }
 
     // Default Constructor

@@ -8,7 +8,6 @@ import DartSystem.Helper;
 import java.util.ArrayList;
 
 public class Album {
-    Employee bob = new Employee();
     private String songID;
     private String title;
     private String artist;
@@ -22,8 +21,7 @@ public class Album {
     // public Album testAlbum = new Album("something","something else ","something else else",45,45);
 
 
-    Helper helper = new Helper();
-    DartController dartController = new DartController();
+    private Helper helper = new Helper();
 
     public Album(){
     };
@@ -76,32 +74,30 @@ public class Album {
         }else return "available";
     }
 
-    public void addAlbum(Album album){
-        viewAlbums();
+    public Album userCreateAlbum(){
+        //viewAlbums();
         String addId = helper.getInput("ID: ");
         String addTitle = helper.getInput("Title: ");
         String addArtist = helper.getInput("Artist: ");
         int addYear = helper.getInt("Year: ");
         double addDailyRent = helper.getDouble("Daily Rent amount: ");
         Album generateAlbum = new Album(addId, addTitle, addArtist, addYear, addDailyRent);
-        dartController.getAlbums().add(generateAlbum);
-        viewAlbums();
-        EmployeeMenu.employeeMenu();
+        return generateAlbum;
     }
 
-    public void removeAlbum(){
-        viewAlbums();
-        String removeAlbum = helper.getInput("Enter id of album to remove: ");
-        for(int i = 0; i < dartController.getAlbums().size(); i++){
-            if(dartController.getAlbums().get(i).getID().equalsIgnoreCase(removeAlbum)){
-                dartController.getAlbums().remove(i);
-            }else{
-                System.out.println("This album doesn't exist. Please check the id again.");
-            }
-        }
-        viewAlbums();
-        EmployeeMenu.employeeMenu();
-    }
+//    public void removeAlbum(){
+//        viewAlbums();
+//        String removeAlbum = helper.getInput("Enter id of album to remove: ");
+//        for(int i = 0; i < dartController.getAlbums().size(); i++){
+//            if(dartController.getAlbums().get(i).getID().equalsIgnoreCase(removeAlbum)){
+//                dartController.getAlbums().remove(i);
+//            }else{
+//                System.out.println("This album doesn't exist. Please check the id again.");
+//            }
+//        }
+//        viewAlbums();
+//        EmployeeMenu.employeeMenu();
+//    }
 
     public void rentAlbum(){
 
@@ -109,9 +105,11 @@ public class Album {
     public void returnAlbum(){
 
     }
-    public void viewAlbums(){
-        for(int i = 0; i < dartController.getAlbums().size(); i++){
-            System.out.println(dartController.getAlbums().toString());
-        }
-    }
+//    public void viewAlbums(){
+////        for(int i = 0; i < dartController.getAlbums().size(); i++){
+////            System.out.println(dartController.getAlbums().toString());
+//        for (Album album : dartController.getAlbums()){
+//            System.out.println(album.toString());
+//        }
+//    }
 }
