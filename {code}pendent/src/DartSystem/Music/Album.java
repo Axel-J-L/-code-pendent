@@ -1,5 +1,7 @@
 package DartSystem.Music;
 
+import DartSystem.Helper;
+
 import java.util.ArrayList;
 
 public class Album {
@@ -7,19 +9,31 @@ public class Album {
     private String title;
     private String artist;
     private int year;
+    private double dailyRent;
     private boolean rentStatus;
     private int rating;
-    private double dailyRent;
-    private  ArrayList<Songs> trackList = new ArrayList<>();
+    private ArrayList<Songs> trackList = new ArrayList<>();
     private ArrayList<Album> albums;
+
+    Helper helper = new Helper();
 
     public Album(){
     };
 
-    public Album(String songId, String title, String artist, ArrayList<Songs> trackList){
+    public Album(String songId, String title, String artist, int year, double dailyRent){
         this.songID = songId;
         this.title = title;
         this.artist = artist;
+        this.year = year;
+        this.dailyRent = dailyRent;
+        this.rentStatus = false;
+    }
+
+    public Album(String songId, String title, String artist, int year, ArrayList<Songs> trackList){
+        this.songID = songId;
+        this.title = title;
+        this.artist = artist;
+        this.year = year;
         this.rentStatus = false;
         this.trackList = trackList;
 
@@ -52,5 +66,24 @@ public class Album {
         if(this.rentStatus){
             return "Not available";
         }else return "available";
+    }
+
+    public void addAlbum(){
+        String addId = helper.getInput("ID: ");
+        String addTitle = helper.getInput("Title: ");
+        String addArtist = helper.getInput("Artist: ");
+        int addYear = helper.getInt("Year: ");
+        double addDailyRent = helper.getDouble("Daily Rent amount: ");
+       albums.add(addId, addTitle, addArtist, addYear, addDailyRent);
+    }
+
+    public removeAlbum(){
+
+    }
+    public rentAlbum(){
+
+    }
+    public returnAlbum(){
+
     }
 }
