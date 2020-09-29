@@ -74,7 +74,8 @@ public class Album {
         String addArtist = helper.getInput("Artist: ");
         int addYear = helper.getInt("Year: ");
         double addDailyRent = helper.getDouble("Daily Rent amount: ");
-       albums.add(addId, addTitle, addArtist, addYear, addDailyRent);
+        Album newAlbum=new Album(addId, addTitle, addArtist, addYear, addDailyRent);
+        albums.add(newAlbum);
     }
 
     public removeAlbum(){
