@@ -2,6 +2,7 @@ package src.DartSystem;
 
 public class Manager {
 
+    private static DartController dartController = new DartController();
     // Default Constructor
     public Manager() {
     }
@@ -23,8 +24,7 @@ public class Manager {
             case "1":
                 Employee addEmployee = new Employee();
                 System.out.print("Creating an Employee. Please type the Employee’s:\n");
-                addEmployee.addEmployee();
-                managerMenu();
+                dartController.addEmployee();
                 break;
             case "2":
                 Employee removeOne = new Employee();
@@ -33,9 +33,7 @@ public class Manager {
                 break;
             case "3":
                 System.out.println("All employees");
-                Employee viewEmployees = new Employee();
-                viewEmployees.viewEmployees();
-                managerMenu();
+                dartController.viewEmployee();
                 break;
             case "4":
                 System.out.println("Return to main menu: ");

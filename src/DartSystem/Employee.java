@@ -12,13 +12,6 @@ public class Employee {
     private double grossSalary;
     private static Employee[] employees =  new Employee[4];
 
-    //    // test box
-//    private static Employee[] employees = {
-//            new Employee("bob", 1948, "a place", 19456),
-//            new Employee("todd", 1977, "some place", 13973),
-//            new Employee("jenny", 1748, "who knows what place", 15673),
-//            new Employee("samantha", 1458, "lost as fuck", 14353)
-//    };
 
     private final double MIN_SALARY=100000.00;
     private final double  BONUS_LOW=4000.00;
@@ -28,6 +21,7 @@ public class Employee {
     private final int SECOND_AGE_FOR_BONUS=30;
 
     Helper tools = new Helper();
+    private static DartController dartController = new DartController();
 
     public Employee(){
 
@@ -42,58 +36,41 @@ public class Employee {
 
     }
 
-    /*==========================Add Employee=========================*/
-//  this is how i think it should be done... -(D) but in a different class.
-
-//        public Employee[] addEmployee(Employee employee, Employee[] employeeArr) {
-//            for (int i = 0; i < employeeArr.length; i++) {
-//                if (employeeArr[i] != null) {
-//                    continue;
-//                } else {
-//                    employeeArr[i] = employee;
-//                    i = employeeArr.length;
-//                    //break; // I WILL FIGHT YOU
-//                }
-//            }
-//            return employeeArr;
-//        }
     private String genEmployeeID() {
         String generatedID = UUID.randomUUID().toString();
         return generatedID;
-//        int newID = 1;
-//        for (int i = 0; i < employees.length; i++){
-//            if (employees[i] == null){
-//                continue;
-//            }
-//            if (employees[i] != null){
-//                newID = employees[i].getEmployeeID() + 1;
-//            }
-//        }
-//        return newID;
     }
 
-
-    public void addEmployee() {
-        if (employees[employees.length - 1] != null) {
-            employees = tools.increaseEmployeeArr(employees);
-        }
+    public Employee addEmployee(){
         String name = tools.getInput("Name: ");
         int birthYear = tools.getInt("birth year: ");
         String address = tools.getInput("Address: ");
         double monthlySalary = tools.getDouble("Monthly gross salary: ");
         grossSalary = monthlySalary * 12;
-        // tools.input.nextLine();
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i] != null) {
-                continue; //starts the loop over until you get = null
-            } else {
-                employees[i] = new Employee(name, birthYear, address, grossSalary);
-                System.out.println(employees[i].toString());
-                i = employees.length;
-                //break; // I WILL FIGHT YOU
-            }
-        }
+        Employee employee = new Employee(name, birthYear, address, grossSalary);
+        return employee;
     }
+//    public void addEmployee() {
+//        if (employees[employees.length - 1] != null) {
+//            employees = tools.increaseEmployeeArr(employees);
+//        }
+//        String name = tools.getInput("Name: ");
+//        int birthYear = tools.getInt("birth year: ");
+//        String address = tools.getInput("Address: ");
+//        double monthlySalary = tools.getDouble("Monthly gross salary: ");
+//        grossSalary = monthlySalary * 12;
+//        // tools.input.nextLine();
+//        for (int i = 0; i < employees.length; i++) {
+//            if (employees[i] != null) {
+//                continue; //starts the loop over until you get = null
+//            } else {
+//                employees[i] = new Employee(name, birthYear, address, grossSalary);
+//                System.out.println(employees[i].toString());
+//                i = employees.length;
+//                //break; // I WILL FIGHT YOU
+//            }
+//        }
+//    }
 
 
 
@@ -140,39 +117,6 @@ public class Employee {
             }
         }
         return employees;
-
-
-
-//        int enteredID = tools.getInt("Which employee should be removed? ID: ");
-//        for (int i = 0; i < employees.length; i++) { // goes through the array fed into method
-//            String deletedName = "";
-//            if (employees[i] == null) {
-//                Manager.managerMenu();
-//            } else if (employees[i].getEmployeeID().equals(enteredID)) { //  it doesnt equal our employee to remove do nothing.
-//                System.out.println("invalid ID");
-//            } else if (employees[i].getEmployeeID().equals(enteredID)){ // this is where we delete the employee
-//                deletedName = employees[i].getName();
-//                employees[i] = null;
-//                System.out.println("\nEmployee " + deletedName + " removed.");
-//                i = employees.length;
-//            } else {
-//                Manager.managerMenu();
-//            }
-//        }
-//
-//        // this actually deletes the employee
-//        for (int j = 0; j < employees.length - 1; j++) { //runs through the array
-//            if (employees[j] != (null) && employees[j + 1] != null) { // position j != null && position j+1 != null
-//                continue; //do nothing
-//            } else if (employees[j] == (null) && employees[j + 1] != null) { // position j = null && position j+1 !=null
-//                employees[j] = employees[j + 1]; // position j = position j + 1\
-//                employees[j + 1] = null;
-//            } else {
-//                j = employees.length; // only other situation would be position j && j+1 == null which means the array has two nulls in a row
-//            }
-//        }
-//        employees = tools.trimArray(employees);
-//        return employees;
     }
 
    public static void authEmployee() {
@@ -194,7 +138,7 @@ public class Employee {
     public void viewEmployees() {
         for (Employee employee : employees) { // for-each loop
             if (employee == null) return;
-                System.out.println(employee.toString());
+            System.out.println(employee.toString());
         }
     }
 

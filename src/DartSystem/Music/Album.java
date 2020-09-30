@@ -71,15 +71,15 @@ public class Album {
         }else return "available";
     }
 
-    public Album userCreateAlbum(){
+    public Album addAlbum(){
         //viewAlbums();
         String addId = helper.getInput("ID: ");
         String addTitle = helper.getInput("Title: ");
         String addArtist = helper.getInput("Artist: ");
         int addYear = helper.getInt("Year: ");
         double addDailyRent = helper.getDouble("Daily Rent amount: ");
-        Album generateAlbum = new Album(addId, addTitle, addArtist, addYear, addDailyRent);
-        return generateAlbum;
+        Album album = new Album(addId, addTitle, addArtist, addYear, addDailyRent);
+        return album;
     }
 
 //    public void removeAlbum(){

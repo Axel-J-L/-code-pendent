@@ -10,11 +10,28 @@ public class DartController {
     //opening child classes
     Employee employee = new Employee();
     Customer customer = new Customer();
+    Manager manager = new Manager();
     Helper helper = new Helper();
     EmployeeMenu employeeMenu = new EmployeeMenu();
     Album album = new Album();
 
-    private ArrayList<Album> albums;
+    // "kind of" Storage
+    ArrayList<Album> albums;
+    ArrayList<Employee> employees;
+
+
+    // Talking to employee
+    //--------------------------------------------------------------------------//
+    public void addEmployee(){
+        this.employees.add(employee.addEmployee());
+        manager.managerMenu();
+    }
+    public void viewEmployee(){
+        for (Employee employee : employees){
+            System.out.println(employee.toString());
+        }
+    }
+    //--------------------------------------------------------------------------//
 
         public void viewAlbums() {
 //        for(int i = 0; i < dartController.getAlbums().size(); i++){
@@ -25,7 +42,7 @@ public class DartController {
         }
 
     public void addAlbum(){
-        this.albums.add(album.userCreateAlbum());
+        this.albums.add(album.addAlbum());
         EmployeeMenu.employeeMenu();
     }
 
