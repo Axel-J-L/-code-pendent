@@ -17,7 +17,8 @@ public class DartController {
     // "kind of" Storage
     ArrayList<Album> albums;
     ArrayList<Employee> employees;
-
+    ArrayList<Game> games;
+    ArrayList<Customer> customers;
 
     // Talking to employee
     //--------------------------------------------------------------------------//
