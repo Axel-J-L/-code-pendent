@@ -14,6 +14,8 @@ public class Rental {
     private boolean isRented;
     private LocalDate rentedDate;
 
+    private Menus menus = new Menus(); // for now so shit isn't angry
+
     private static double rentalIncome = 25.00;
 
     private static Game[] rental = Game.getGames();
@@ -61,7 +63,7 @@ public class Rental {
                 System.out.println("Game with this ID not found.");
         }
 
-        CustomerMenu.customerMenu();
+        menus.customerMenu();
     }
 
     public void returnGame() {
@@ -94,13 +96,13 @@ public class Rental {
         } else {
             System.out.println("Game with this ID not found.");
         }
-        CustomerMenu.customerMenu();
+        menus.customerMenu();
     }
 
     public void showRentalIncome() {
         System.out.println("Rental income to-date is: " + getRentalIncome() + " SEK\n");
 
-        EmployeeMenu.employeeMenu();
+        menus.employeeMenu();
     }
 
     /**

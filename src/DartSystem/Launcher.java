@@ -6,11 +6,11 @@ import java.lang.*;
 public class Launcher {
 
     public static void main(String[] args) {
-        Helper helper = new Helper();
-        DartController session = new DartController();
-        session.DartController();
+        DartController dartController = new DartController();
+        dartController.run();
 
         //close (public static final scanner (in Helper class))
+        Helper helper = new Helper();
         helper.input.close();
     }
 

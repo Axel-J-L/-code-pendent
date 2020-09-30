@@ -9,6 +9,8 @@ public class Customer {
     private ArrayList<Message> inbox;
     Helper helper=new Helper();
 
+    Menus menus = new Menus(); // for now so shit isn't angry
+
     private static Customer[] customerList={ new Customer(1,"Vernita"),
             new Customer(2,"Navya"),
             new Customer(3,"Drake"),
@@ -75,7 +77,7 @@ public class Customer {
         }
         else if (anotherEntry!=1){
             System.out.print("Invalid entry ");
-            EmployeeMenu.employeeMenu();
+            menus.employeeMenu();
         }
     }
 
@@ -100,7 +102,7 @@ public class Customer {
             }
         }
         System.out.println("Customer Removed");
-        EmployeeMenu.employeeMenu();
+        menus.employeeMenu();
     }
 
     public void viewEmployee(){

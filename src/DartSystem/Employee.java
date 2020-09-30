@@ -21,7 +21,7 @@ public class Employee {
     private final int SECOND_AGE_FOR_BONUS=30;
 
     Helper tools = new Helper();
-    private static DartController dartController = new DartController();
+    private DartController dartController = new DartController();
 
     public Employee(){
 
@@ -119,20 +119,20 @@ public class Employee {
         return employees;
     }
 
-   public static void authEmployee() {
-        String password = "password123";
-        Helper Authorize = new Helper();
-        Boolean authSuccess = Authorize.authenticate(password);
-
-        if (authSuccess) {
-            EmployeeMenu employeeMenu = new EmployeeMenu();
-            employeeMenu.employeeMenu();
-        } else {
-            System.out.println("\n*** Wrong password ***\n");
-            DartController mainMenu = new DartController();
-            mainMenu.DartController();
-        }
-    }
+//   public static void authEmployee() {
+//        String password = "password123";
+//        Helper Authorize = new Helper();
+//        Boolean authSuccess = Authorize.authenticate(password);
+//
+//        if (authSuccess) {
+//            EmployeeMenu employeeMenu = new EmployeeMenu();
+//            employeeMenu.employeeMenu();
+//        } else {
+//            System.out.println("\n*** Wrong password ***\n");
+//            DartController mainMenu = new DartController();
+//            mainMenu.DartController();
+//        }
+//    }
 
 
     public void viewEmployees() {

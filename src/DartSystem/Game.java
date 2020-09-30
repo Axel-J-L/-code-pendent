@@ -13,6 +13,8 @@ public class Game {
     private boolean isRented;
     private LocalDate rentedDate;
 
+    private Menus menus = new Menus(); // for now so shit isn't angry
+
     private static Game[] games = { new Game( "Sonic: The Hedgehog", "Explore", 23, false),
             new Game( "Crash Bandicoot", "Racing", 24, false),
             new Game( "The Legend of Zelda", "Explore", 51, true),
@@ -145,7 +147,7 @@ public class Game {
             addNewGame();
         } else if (userChoice == 2) {
             viewAll();
-        } else EmployeeMenu.employeeMenu();
+        } else menus.employeeMenu();
     }
 
     public void removeGame() {
@@ -176,7 +178,7 @@ public class Game {
                 }
             }
         } if (!contains) System.out.println("Couldn't find that game. Please make sure you enter the correct ID.\n");
-        EmployeeMenu.employeeMenu();
+        menus.employeeMenu();
     }
 
     public void viewAll(){
@@ -192,7 +194,7 @@ public class Game {
         int whereTo = userChoice.nextInt();
 
         if (whereTo == 1){
-            EmployeeMenu.employeeMenu();
-        } else DartController.DartController();
+            menus.employeeMenu();
+        } else menus.mainMenu();
     }
 }
