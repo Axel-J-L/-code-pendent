@@ -6,16 +6,11 @@ public class Customer {
 
     private int customerId;
     private String name;
-    private ArrayList<Message> inbox;
+    private Membership membership;
+
     Helper helper=new Helper();
 
-    Menus menus = new Menus(); // for now so shit isn't angry
-
-    private static Customer[] customerList={ new Customer(1,"Vernita"),
-            new Customer(2,"Navya"),
-            new Customer(3,"Drake"),
-            new Customer(4,"Altan"),
-            new Customer(5,"Axel")};
+    private ArrayList<Customer> customerList = DartController.getCustomerList();
 
     // Default Constructor
     Customer() {
@@ -24,25 +19,36 @@ public class Customer {
     Customer(int customerId,String name){
         this.customerId=customerId;
         this.name=name;
-        this.inbox = new ArrayList<Message>(); // adds an inbox for every customer.
-    }
-
-    // Send Message method
-    public void sendMessage(){
-
+        Membership membership = new Membership();
     }
 
     public String toString(){
-        return
-                "ID: "+ this.customerId+ ", Name: "+this.name;
+        return "ID: "+ this.customerId+ ", Name: "+this.name;
     }
+
+    public void addCustomer(){
+        System.out.print("Enter the customers ID : ");
+        int customerID = helper.input.nextInt();
+        helper.input.nextLine();
+        System.out.print("Enter the customers  name: ");
+        String customerName = helper.input.nextLine();
+        Customer newCustomer = new Customer(customerID, name);
+        customerList.add(newCustomer);
+        viewCustomer();
+    }
+    public void removeCustomer(){
+
+    }
+
+   /*
     public void IncreaseArray() {
-        Customer[] customerListNew = new Customer[customerList.length + (customerList.length / 2)];
-        for (int i = 0; i < customerList.length; i++) {
-            customerListNew[i] = customerList[i];
+        ArrayList<Customer> customerListNew = new Customer[customerList.size() + (customerList.size() / 2)];
+        for (int i = 0; i < customerList.size(); i++) {
+            customerListNew[i] = customerList(i);
         }
         customerList = customerListNew;
     }
+
     public void addCustomer() {
         int countArray = 0;
         for(int i = 0; i < customerList.length; i++){
@@ -77,18 +83,17 @@ public class Customer {
         }
         else if (anotherEntry!=1){
             System.out.print("Invalid entry ");
-            menus.employeeMenu();
+            EmployeeMenu.employeeMenu();
         }
     }
 
-
     public void removeCustomer() {
-        viewEmployee();
+        viewCustomer();
         int cusIdToRemove = helper.getInt("Remove a customer here by entering their ID : ");
 
-        for (int i = 0; i < customerList.length; i++) {
+        for (int i = 0; i < customerList.size(); i++) {
             if (customerList[i].customerId == cusIdToRemove) {
-                for (int j = i + 1; j < customerList.length; j++) {
+                for (int j = i + 1; j < customerList.size(); j++) {
                     customerList[i] = customerList[j];
                     i++;
                 }
@@ -102,14 +107,32 @@ public class Customer {
             }
         }
         System.out.println("Customer Removed");
-        menus.employeeMenu();
+        EmployeeMenu.employeeMenu();
     }
 
-    public void viewEmployee(){
-        for (int i = 0; i < customerList.length; i++) {
-            if (customerList[i]!=null){
-                System.out.println(customerList[i].toString());
+*/
+
+    public void viewCustomer(){
+        for (int i = 0; i < customerList.size(); i++) {
+            if (customerList(i) == null) {
+                continue;
             }
+            System.out.println(customerList(i).toString());
+        }
+    }
+
+    public void addMembership(){
+
+        String type;
+        int membershipType = helper.getInt("Which membership do you want to apply for? \n 1) Silver \n 2) Gold \n 3) Platinum" );
+        if(membershipType == 1){
+            type = "Silver";
+        }else if (membershipType == 2){
+            type = "Gold";
+        }else if (membershipType == 3){
+            type = "Platinum";
+        }else{
+            System.out.println("Not a valid input.");
         }
     }
 
