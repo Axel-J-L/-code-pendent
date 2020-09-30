@@ -1,6 +1,4 @@
-package DartSystem;
-
-import DartSystem.Music.Album;
+package src.DartSystem;
 
 public class EmployeeMenu {
     // parent class (only static because menus need to be made nonestatic.)

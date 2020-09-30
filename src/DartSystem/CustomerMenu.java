@@ -1,4 +1,4 @@
-package DartSystem;
+package src.DartSystem;
 
 public class CustomerMenu {
 
@@ -24,7 +24,7 @@ public class CustomerMenu {
                 toReturn.returnGame();
                 break;
             case "3":
-                DartController.DartController();
+                src.DartSystem.DartController.DartController();
                 break;
             default:
                 System.out.println("no match");

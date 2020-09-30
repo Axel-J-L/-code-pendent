@@ -1,9 +1,6 @@
-package DartSystem.Music;
+package src.DartSystem.Music;
 
-import DartSystem.DartController;
-import DartSystem.Employee;
-import DartSystem.EmployeeMenu;
-import DartSystem.Helper;
+import src.DartSystem.Helper;
 
 import java.util.ArrayList;
 

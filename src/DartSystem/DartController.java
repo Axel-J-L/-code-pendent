@@ -1,6 +1,6 @@
-package DartSystem;
+package src.DartSystem;
 
-import DartSystem.Music.Album;
+import src.DartSystem.Music.Album;
 
 import java.lang.*;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public class DartController {
     EmployeeMenu employeeMenu = new EmployeeMenu();
     Album album = new Album();
 
-    private ArrayList<Album> albums = new ArrayList<Album>();
+    private ArrayList<Album> albums;
 
         public void viewAlbums() {
 //        for(int i = 0; i < dartController.getAlbums().size(); i++){
@@ -24,11 +24,9 @@ public class DartController {
             }
         }
 
-
-
     public void addAlbum(){
         this.albums.add(album.userCreateAlbum());
-        employeeMenu.employeeMenu();
+        EmployeeMenu.employeeMenu();
     }
 
     // Default Constructor

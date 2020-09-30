@@ -1,5 +1,4 @@
-package DartSystem;
-import DartSystem.Game;
+package src.DartSystem;
 
 import java.time.LocalDate;
 import java.util.UUID;
