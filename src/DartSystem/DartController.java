@@ -14,12 +14,28 @@ public class DartController {
     private static Menus menu = new Menus();
     private static Album album = new Album();
 
+
     // "kind of" Storage
     ArrayList<Album> albums;
     ArrayList<Employee> employees;
     ArrayList<Game> games;
-    ArrayList<Customer> customers;
+    ArrayList<Customer> customerList;
 
+    public  ArrayList<Customer> getCustomers() {
+        return customerList;
+    }
+   public void addCustomer(){
+        this.customerList.add(customer.addCustomer());
+       System.out.println(customerList.toString());
+   }
+
+
+    public Customer getCustomer(){
+        return customer;
+    }
+    public void setCustomer(){
+        this.customer = customer;
+    }
     // Talking to employee
     //--------------------------------------------------------------------------//
     public void addEmployee(){
@@ -50,6 +66,14 @@ public class DartController {
     public void run() {
         menu.mainMenu();
         }
+
 }
 
-
+ /* public void initialiseCustomerArraylist(){
+        System.out.println("Checcccccccccccccccccccccck");
+        setCustomers().add( new Customer(1,"Vernita"));
+        getCustomers().add( new Customer(2,"Navya"));
+        getCustomers().add( new Customer(3,"Drake"));
+        getCustomers().add( new Customer(4,"Altan"));
+        setCustomers().add( new Customer(5,"Axel"));
+    }*/

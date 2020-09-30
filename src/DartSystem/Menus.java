@@ -7,7 +7,7 @@ public class Menus {
     private String prompt;
 
     private DartController dartController = new DartController();
-
+    private   Customer customer = new Customer();
     public Menus() {
     }
 
@@ -149,7 +149,7 @@ public class Menus {
                     break;
                 case "7":
                     System.out.println("Register Customer");
-                    System.out.println("add the method for now returns you to main menu");
+                    dartController.addCustomer();
                     mainMenu();
                     break;
                 case "8":
@@ -160,7 +160,9 @@ public class Menus {
                 case "9":
                     System.out.println("View Customers");
                     System.out.println("add the method for now returns you to main menu");
-                    mainMenu();
+
+                    customer.viewCustomer();
+                   // mainMenu();
                     break;
                 case "10":
                     System.out.println("View Total Rent Profit");

@@ -10,7 +10,8 @@ public class Customer {
 
     Helper helper=new Helper();
 
-    private ArrayList<Customer> customerList = DartController.getCustomerList();
+  ArrayList<Customer> customerList;
+
 
     // Default Constructor
     Customer() {
@@ -26,19 +27,19 @@ public class Customer {
         return "ID: "+ this.customerId+ ", Name: "+this.name;
     }
 
-    public void addCustomer(){
+    public Customer addCustomer(){
         System.out.print("Enter the customers ID : ");
         int customerID = helper.input.nextInt();
         helper.input.nextLine();
         System.out.print("Enter the customers  name: ");
         String customerName = helper.input.nextLine();
         Customer newCustomer = new Customer(customerID, name);
-        customerList.add(newCustomer);
-        viewCustomer();
+        return newCustomer;
     }
     public void removeCustomer(){
 
     }
+
 
    /*
     public void IncreaseArray() {
@@ -114,14 +115,15 @@ public class Customer {
 
     public void viewCustomer(){
         for (int i = 0; i < customerList.size(); i++) {
-            if (customerList(i) == null) {
+            if (customerList == null) {
                 continue;
             }
-            System.out.println(customerList(i).toString());
+            System.out.println(customerList.toString());
         }
     }
-
     public void addMembership(){
+
+
 
         String type;
         int membershipType = helper.getInt("Which membership do you want to apply for? \n 1) Silver \n 2) Gold \n 3) Platinum" );
@@ -135,7 +137,6 @@ public class Customer {
             System.out.println("Not a valid input.");
         }
     }
-
 }
 
 
