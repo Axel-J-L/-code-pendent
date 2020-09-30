@@ -1,9 +1,12 @@
 package src.DartSystem;
 
+import java.util.ArrayList;
+
 public class Customer {
 
     private int customerId;
     private String name;
+    private ArrayList<Message> inbox;
     Helper helper=new Helper();
 
     private static Customer[] customerList={ new Customer(1,"Vernita"),
@@ -19,6 +22,11 @@ public class Customer {
     Customer(int customerId,String name){
         this.customerId=customerId;
         this.name=name;
+        this.inbox = new ArrayList<Message>(); // adds an inbox for every customer.
+    }
+
+    // Send Message method
+    public void sendMessage(){
 
     }
 
